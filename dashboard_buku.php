@@ -26,14 +26,32 @@ $user_id = $_SESSION['user_id'];
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .card-icon {
+            font-size: 48px;
+            /* Ukuran ikon */
+            color: #555;
+            /* Warna ikon */
+            margin-bottom: 15px;
+            /* Jarak antara ikon dan judul card */
+            display: block;
+            /* Pastikan ikon memiliki satu baris penuh */
+        }
 
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        
+    </style>
 
 </head>
 
@@ -77,56 +95,56 @@ $user_id = $_SESSION['user_id'];
         </div>
 
         <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-    <div class="container">
-        <div class="d-flex align-items-center">
-            <!-- Logo -->
-            <div class="site-logo">
-                <a href="dashboard.php" class="d-block">BookChapter.</a>
-            </div>
-            
-            <!-- Navigation (for Desktop and Mobile) -->
-            <div class="mr-auto">
-                <!-- Navbar for mobile devices -->
-                <nav class="site-navigation position-relative text-right" role="navigation">
-                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li><a href="dashboard.php" class="nav-link text-left">Beranda</a></li>
-                        <li class="active"><a href="dashboard_buku.php" class="nav-link text-left">Buku</a></li>
-                        <li><a href="dashboard_kontak.php" class="nav-link text-left">Bantuan</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Mobile Navbar Toggle Button -->
-                <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard.php">Beranda</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="dashboard_buku.php">Buku</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard_kontak.php">Bantuan</a>
-                            </li>
-                        </ul>
+            <div class="container">
+                <div class="d-flex align-items-center">
+                    <!-- Logo -->
+                    <div class="site-logo">
+                        <a href="dashboard.php" class="d-block">BookChapter.</a>
                     </div>
-                </nav>
-            </div>
-            
-            <!-- User Account Menu (for logged-in users) -->
-            <div class="ml-auto">
-                <!-- <div class="">
+
+                    <!-- Navigation (for Desktop and Mobile) -->
+                    <div class="mr-auto">
+                        <!-- Navbar for mobile devices -->
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li><a href="dashboard.php" class="nav-link text-left">Beranda</a></li>
+                                <li class="active"><a href="dashboard_buku.php" class="nav-link text-left">Buku</a></li>
+                                <li><a href="dashboard_kontak.php" class="nav-link text-left">Bantuan</a></li>
+                            </ul>
+                        </nav>
+
+                        <!-- Mobile Navbar Toggle Button -->
+                        <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="dashboard.php">Beranda</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="dashboard_buku.php">Buku</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="dashboard_kontak.php">Bantuan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <!-- User Account Menu (for logged-in users) -->
+                    <div class="ml-auto">
+                        <!-- <div class="">
                     <a class="">
                         <span class=""></span>
                     </a>
                 </div> -->
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</header>
+        </header>
 
 
         <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">
@@ -146,50 +164,50 @@ $user_id = $_SESSION['user_id'];
         <div class="site-section pb-0">
             <div class="container">
 
-                <div class="row">
-                    <div class="col-lg-4 mb-5">
-                        <div class="news-entry-item">
-                            <a href="dashboard_bab_buku.php" class="thumbnail">
-                                <img src="images/buku.png" alt="Image" class="img-fluid">
-                                <div class="date">
-                                    <span>1</span>
-                                </div>
-                            </a>
-                            <h3 class="mb-0"><a href="dashboard_bab_buku.php">Daftar Bab Buku</a></h3>
-                            <div class="mb-3">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <!-- Card 1 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-book-open card-icon"></i><br>
+                                <h5 class="card-title text-dark">Daftar Bab Buku</h5>
+                                <p class="card-text">Temukan berbagai bab buku dari beragam kategori. Pilih bab yang sesuai keinginan anda.</p>
                             </div>
-                            <p>Temukan berbagai bab buku dari beragam topik. Pilih bab yang sesuai kebutuhan Anda untuk memulai pembelajaran yang lebih fokus.</p>
+                            <div class="card-body">
+                                <a href="dashboard_bab_buku.php" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-5">
-                        <div class="news-entry-item">
-                            <a href="dashboard_buku_dibeli.php" class="thumbnail">
-                                <img src="images/keranjang.png" alt="Image" class="img-fluid">
-                                <div class="date">
-                                    <span>2</span>
-                                </div>
-                            </a>
-                            <h3 class="mb-0"><a href="dashboard_buku_dibeli.php">Bab Buku yang sudah Dibeli</a></h3>
-                            <div class="mb-3">
+
+                    <!-- Card 2 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-shopping-cart card-icon"></i><br>
+                                <h5 class="card-title text-dark">Bab Buku yang sudah Dibeli</h5>
+                                <p class="card-text">Akses bab-bab yang sudah Anda beli kapan saja. Semua tersedia di satu tempat untuk kemudahan Anda.</p>
                             </div>
-                            <p>Akses bab-bab yang sudah Anda beli kapan saja. Semua tersedia di satu tempat untuk kemudahan Anda.</p>
+                            <div class="card-body">
+                                <a href="dashboard_buku_dibeli.php" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-5">
-                        <div class="news-entry-item">
-                            <a href="dashboard_upload_pengerjaan.php" class="thumbnail">
-                                <img src="images/hasil.png" alt="Image" class="img-fluid">
-                                <div class="date">
-                                    <span>3</span>
-                                </div>
-                            </a>
-                            <h3 class="mb-0"><a href="dashboard_upload_pengerjaan.php">Upload Hasil Pengerjaan Bab Buku</a></h3>
-                            <div class="mb-3">
+
+                    <!-- Card 3 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-upload card-icon"></i><br>
+                                <h5 class="card-title text-dark">Upload Hasil Pengerjaan</h5>
+                                <p class="card-text">Unggah hasil pengerjaan atau catatan dari bab yang Anda pelajari untuk referensi atau penyimpanan.</p>
                             </div>
-                            <p>Unggah hasil pengerjaan atau catatan dari bab yang Anda pelajari untuk referensi atau penyimpanan.</p>
+                            <div class="card-body">
+                                <a href="dashboard_upload_pengerjaan.php" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div><br><br>
+
             </div>
         </div>
 
