@@ -144,6 +144,19 @@ if ($users === false) {
       <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item dropdown">
@@ -180,37 +193,39 @@ if ($users === false) {
               </div><br>
               <div class="card mb-0">
                 <div class="card-body p-4">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">ID_User</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Nama Lengkap</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Tanggal Registrasi</th>
-                        <th scope="col">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php while ($user = $users->fetch_assoc()): ?>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
                         <tr>
-                          <td><?= $user['user_id'] ?></td>
-                          <td><?= htmlspecialchars($user['username']) ?></td>
-                          <td><?= htmlspecialchars($user['email']) ?></td>
-                          <td><?= htmlspecialchars($user['full_name']) ?></td>
-                          <td><?= $user['created_at'] ?></td>
-                          <td>
-                            <!-- Tombol Hapus User -->
-                            <form method="POST" style="display:inline;">
-                              <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
-                              <input type="hidden" name="action" value="delete">
-                              <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus user ini?');">Hapus</button>
-                            </form>
-                          </td>
+                          <th scope="col">ID_User</th>
+                          <th scope="col">Username</th>
+                          <th scope="col">Nama Lengkap</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Tanggal Registrasi</th>
+                          <th scope="col">Aksi</th>
                         </tr>
-                      <?php endwhile; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php while ($user = $users->fetch_assoc()): ?>
+                          <tr>
+                            <td><?= $user['user_id'] ?></td>
+                            <td><?= htmlspecialchars($user['username']) ?></td>
+                            <td><?= htmlspecialchars($user['email']) ?></td>
+                            <td><?= htmlspecialchars($user['full_name']) ?></td>
+                            <td><?= $user['created_at'] ?></td>
+                            <td>
+                              <!-- Tombol Hapus User -->
+                              <form method="POST" style="display:inline;">
+                                <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                                <input type="hidden" name="action" value="delete">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus user ini?');">Hapus</button>
+                              </form>
+                            </td>
+                          </tr>
+                        <?php endwhile; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

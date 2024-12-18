@@ -176,6 +176,19 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
       <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item dropdown">
@@ -239,41 +252,43 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
               <!-- Daftar Kategori -->
               <div class="card">
                 <div class="card-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Deskripsi</th>
-                        <th>Cover</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php while ($row = $categories->fetch_assoc()): ?>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
                         <tr>
-                          <td><?php echo $row['id']; ?></td>
-                          <td><?php echo htmlspecialchars($row['title']); ?></td>
-                          <td><?php echo htmlspecialchars($row['category']); ?></td>
-                          <td><?php echo htmlspecialchars($row['description']); ?></td>
-                          <td>
-                            <?php if ($row['image_path']): ?>
-                              <img src="../<?php echo $row['image_path']; ?>" alt="Cover" style="width: 100px; height: auto;">
-                            <?php else: ?>
-                              Tidak ada gambar
-                            <?php endif; ?>
-                          </td>
-                          <td>
-                            <form method="POST" style="display: inline;">
-                              <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                              <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</button>
-                            </form>
-                          </td>
+                          <th>ID</th>
+                          <th>Judul</th>
+                          <th>Kategori</th>
+                          <th>Deskripsi</th>
+                          <th>Cover</th>
+                          <th>Aksi</th>
                         </tr>
-                      <?php endwhile; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php while ($row = $categories->fetch_assoc()): ?>
+                          <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo htmlspecialchars($row['title']); ?></td>
+                            <td><?php echo htmlspecialchars($row['category']); ?></td>
+                            <td><?php echo htmlspecialchars($row['description']); ?></td>
+                            <td>
+                              <?php if ($row['image_path']): ?>
+                                <img src="../<?php echo $row['image_path']; ?>" alt="Cover" style="width: 100px; height: auto;">
+                              <?php else: ?>
+                                Tidak ada gambar
+                              <?php endif; ?>
+                            </td>
+                            <td>
+                              <form method="POST" style="display: inline;">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</button>
+                              </form>
+                            </td>
+                          </tr>
+                        <?php endwhile; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

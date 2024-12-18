@@ -129,6 +129,19 @@ $result_history = $conn->query($sql_history);
       <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item dropdown">
@@ -160,87 +173,91 @@ $result_history = $conn->query($sql_history);
                 <h4 class="card-title fw-semibold mb-3">Verifikasi Pembayaran Buku</h4><br>
                 <div class="card">
                   <div class="card-body p-4">
-                    <?php if ($result_waiting->num_rows > 0): ?>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Chapter Title</th>
-                            <th>Order Date</th>
-                            <th>Payment Proof</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php while ($row = $result_waiting->fetch_assoc()): ?>
+                    <div class="table-responsive">
+                      <?php if ($result_waiting->num_rows > 0): ?>
+                        <table class="table">
+                          <thead>
                             <tr>
-                              <td><?= $row['order_id'] ?></td>
-                              <td><?= htmlspecialchars($row['username']) ?></td>
-                              <td><?= htmlspecialchars($row['title']) ?></td>
-                              <td><?= $row['order_date'] ?></td>
-                              <td>
-                                <?php if (file_exists('../' . $row['payment_proof_path'])): ?>
-                                  <a href="../<?= htmlspecialchars($row['payment_proof_path']) ?>" target="_blank">View Proof</a>
-                                <?php else: ?>
-                                  <span style="color: red;">Proof Not Found</span>
-                                <?php endif; ?>
-                              </td>
-                              <td><?= $row['status'] ?></td>
-                              <td>
-                                <form method="POST">
-                                  <input type="hidden" name="order_id" value="<?= $row['order_id'] ?>">
-                                  <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
-                                  <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
-                                </form>
-                              </td>
+                              <th>Order ID</th>
+                              <th>Username</th>
+                              <th>Chapter Title</th>
+                              <th>Order Date</th>
+                              <th>Payment Proof</th>
+                              <th>Status</th>
+                              <th>Actions</th>
                             </tr>
-                          <?php endwhile; ?>
-                        </tbody>
-                      </table>
-                    <?php else: ?>
-                      <p>Tidak ada pembayaran yang perlu diverifikasi.</p>
-                    <?php endif; ?>
+                          </thead>
+                          <tbody>
+                            <?php while ($row = $result_waiting->fetch_assoc()): ?>
+                              <tr>
+                                <td><?= $row['order_id'] ?></td>
+                                <td><?= htmlspecialchars($row['username']) ?></td>
+                                <td><?= htmlspecialchars($row['title']) ?></td>
+                                <td><?= $row['order_date'] ?></td>
+                                <td>
+                                  <?php if (file_exists('../' . $row['payment_proof_path'])): ?>
+                                    <a href="../<?= htmlspecialchars($row['payment_proof_path']) ?>" target="_blank">View Proof</a>
+                                  <?php else: ?>
+                                    <span style="color: red;">Proof Not Found</span>
+                                  <?php endif; ?>
+                                </td>
+                                <td><?= $row['status'] ?></td>
+                                <td>
+                                  <form method="POST">
+                                    <input type="hidden" name="order_id" value="<?= $row['order_id'] ?>">
+                                    <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                                    <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                                  </form>
+                                </td>
+                              </tr>
+                            <?php endwhile; ?>
+                          </tbody>
+                        </table>
+                      <?php else: ?>
+                        <p>Tidak ada pembayaran yang perlu diverifikasi.</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div><br>
                 <h4 class="card-title fw-semibold mb-3">Riwayat Pembelian Buku</h4><br>
                 <div class="card mb-0">
                   <div class="card-body p-4">
-                    <?php if ($result_history->num_rows > 0): ?>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Chapter Title</th>
-                            <th>Order Date</th>
-                            <th>Payment Proof</th>
-                            <th>Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php while ($row = $result_history->fetch_assoc()): ?>
+                    <div class="table-responsive">
+                      <?php if ($result_history->num_rows > 0): ?>
+                        <table class="table">
+                          <thead>
                             <tr>
-                              <td><?= $row['order_id'] ?></td>
-                              <td><?= htmlspecialchars($row['username']) ?></td>
-                              <td><?= htmlspecialchars($row['title']) ?></td>
-                              <td><?= $row['order_date'] ?></td>
-                              <td>
-                                <?php if (file_exists('../' . $row['payment_proof_path'])): ?>
-                                  <a href="../<?= htmlspecialchars($row['payment_proof_path']) ?>" target="_blank">View Proof</a>
-                                <?php else: ?>
-                                  <span style="color: red;">Proof Not Found</span>
-                                <?php endif; ?>
-                              </td>
-                              <td><?= $row['status'] ?></td>
+                              <th>Order ID</th>
+                              <th>Username</th>
+                              <th>Chapter Title</th>
+                              <th>Order Date</th>
+                              <th>Payment Proof</th>
+                              <th>Status</th>
                             </tr>
-                          <?php endwhile; ?>
-                        </tbody>
-                      </table>
-                    <?php else: ?>
-                      <p>Tidak ada riwayat pembelian.</p>
-                    <?php endif; ?>
+                          </thead>
+                          <tbody>
+                            <?php while ($row = $result_history->fetch_assoc()): ?>
+                              <tr>
+                                <td><?= $row['order_id'] ?></td>
+                                <td><?= htmlspecialchars($row['username']) ?></td>
+                                <td><?= htmlspecialchars($row['title']) ?></td>
+                                <td><?= $row['order_date'] ?></td>
+                                <td>
+                                  <?php if (file_exists('../' . $row['payment_proof_path'])): ?>
+                                    <a href="../<?= htmlspecialchars($row['payment_proof_path']) ?>" target="_blank">View Proof</a>
+                                  <?php else: ?>
+                                    <span style="color: red;">Proof Not Found</span>
+                                  <?php endif; ?>
+                                </td>
+                                <td><?= $row['status'] ?></td>
+                              </tr>
+                            <?php endwhile; ?>
+                          </tbody>
+                        </table>
+                      <?php else: ?>
+                        <p>Tidak ada riwayat pembelian.</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div>
               </div>
