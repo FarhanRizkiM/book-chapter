@@ -76,45 +76,47 @@ session_start(); // Memulai session untuk mengecek status login
     </div>
 
     <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-            <div class="container">
-                <div class="d-flex align-items-center">
-                    <!-- Logo -->
-                    <div class="site-logo">
-                        <a href="index.php" class="d-block">BookChapter.</a>
-                    </div>
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <!-- Logo -->
+          <div class="site-logo">
+            <a href="dashboard.php" class="text-nowrap logo-img">
+              <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+            </a>
+          </div>
 
-                    <!-- Navigation (Desktop & Mobile) -->
-                    <div class="mr-auto">
-                        <!-- Navbar for Desktop -->
-                        <nav class="site-navigation position-relative text-right" role="navigation">
-                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                                <li><a href="index.php" class="nav-link text-left">Beranda</a></li>
-                                <li class="active"><a href="about.php" class="nav-link text-left">Tentang</a></li>
-                                <li><a href="services.php" class="nav-link text-left">Layanan</a></li>
-                                <li><a href="contact.php" class="nav-link text-left">Hubungi Kami</a></li>
-                            </ul>
-                        </nav>
+          <!-- Navigation (Desktop & Mobile) -->
+          <div class="mr-auto">
+            <!-- Navbar for Desktop -->
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="index.php" class="nav-link text-left">Beranda</a></li>
+                <li class="active"><a href="about.php" class="nav-link text-left">Tentang</a></li>
+                <li><a href="services.php" class="nav-link text-left">Layanan</a></li>
+                <li><a href="contact.php" class="nav-link text-left">Hubungi Kami</a></li>
+              </ul>
+            </nav>
 
-                        <!-- Mobile Navbar Toggle Button -->
-                        <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="site-menu main-menu js-clone-nav mr-auto">
-                                    <li><a href="index.php" class="nav-link text-left">Beranda</a></li>
-                                    <li class="active"><a href="about.php" class="nav-link text-left">Tentang</a></li>
-                                    <li><a href="services.php" class="nav-link text-left">Layanan</a></li>
-                                    <li><a href="contact.php" class="nav-link text-left">Hubungi Kami</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
+            <!-- Mobile Navbar Toggle Button -->
+            <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="site-menu main-menu js-clone-nav mr-auto">
+                  <li><a href="index.php" class="nav-link text-left">Beranda</a></li>
+                  <li class="active"><a href="about.php" class="nav-link text-left">Tentang</a></li>
+                  <li><a href="services.php" class="nav-link text-left">Layanan</a></li>
+                  <li><a href="contact.php" class="nav-link text-left">Hubungi Kami</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
 
-                    <!-- User Account Menu -->
-                </div>
-            </div>
-        </header>
+          <!-- User Account Menu -->
+        </div>
+      </div>
+    </header>
 
 
     <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">

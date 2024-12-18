@@ -74,9 +74,11 @@ $user_id = $_SESSION['user_id'];
                 <div class="d-flex align-items-center">
                     <!-- Logo -->
                     <div class="site-logo">
-                        <a href="dashboard.php" class="d-block">BookChapter.</a>
+                        <a href="dashboard.php" class="text-nowrap logo-img">
+                            <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+                        </a>
                     </div>
-                    
+
                     <!-- Navigation (for Desktop and Mobile) -->
                     <div class="mr-auto">
                         <!-- Navbar for mobile devices -->
@@ -108,7 +110,7 @@ $user_id = $_SESSION['user_id'];
                             </div>
                         </nav>
                     </div>
-                    
+
                     <!-- User Account Menu (for logged-in users) -->
                     <div class="ml-auto">
                         <!-- <div class="">
@@ -136,9 +138,6 @@ $user_id = $_SESSION['user_id'];
 
         <div class="site-section pb-0">
             <div class="container">
-                <h2 class="text-center">Bab yang Sudah Dibeli</h2>
-                <p class="text-center">Anda dapat mengunduh bab buku yang sudah dibayar di sini:</p> <br>
-
                 <?php
                 // Mengambil daftar bab yang dibeli user (waiting, approved, rejected)
                 $orders = $conn->query("SELECT orders.order_id, chapters.title, chapters.file_path, orders.status 
@@ -164,14 +163,14 @@ $user_id = $_SESSION['user_id'];
                                     <td class="align-middle text-center"><?= $i++ ?></td>
                                     <td class="align-middle text-center"><?= htmlspecialchars($order['title']) ?></td>
                                     <td class="align-middle text-center">
-                                        <?php 
-                                            if ($order['status'] == 'approved') {
-                                                echo 'Approved';
-                                            } elseif ($order['status'] == 'waiting_confirmation') {
-                                                echo 'Waiting';
-                                            } elseif ($order['status'] == 'rejected') {
-                                                echo 'Rejected';
-                                            }
+                                        <?php
+                                        if ($order['status'] == 'approved') {
+                                            echo 'Approved';
+                                        } elseif ($order['status'] == 'waiting_confirmation') {
+                                            echo 'Waiting';
+                                        } elseif ($order['status'] == 'rejected') {
+                                            echo 'Rejected';
+                                        }
                                         ?>
                                     </td>
                                     <td class="align-middle text-center">

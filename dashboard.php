@@ -70,57 +70,59 @@ $user_id = $_SESSION['user_id'];
             </div>
         </div>
 
-<header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-    <div class="container">
-        <div class="d-flex align-items-center">
-            <!-- Logo -->
-            <div class="site-logo">
-                <a href="dashboard.php" class="d-block">BookChapter.</a>
-            </div>
-            
-            <!-- Navigation (for Desktop and Mobile) -->
-            <div class="mr-auto">
-                <!-- Navbar for mobile devices -->
-                <nav class="site-navigation position-relative text-right" role="navigation">
-                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li class="active"><a href="dashboard.php" class="nav-link text-left">Beranda</a></li>
-                        <li><a href="dashboard_buku.php" class="nav-link text-left">Buku</a></li>
-                        <li><a href="dashboard_kontak.php" class="nav-link text-left">Bantuan</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Mobile Navbar Toggle Button -->
-                <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="dashboard.php">Beranda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard_buku.php">Buku</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard_kontak.php">Bantuan</a>
-                            </li>
-                        </ul>
+        <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+            <div class="container">
+                <div class="d-flex align-items-center">
+                    <!-- Logo -->
+                    <div class="site-logo">
+                        <a href="dashboard.php" class="text-nowrap logo-img">
+                            <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+                        </a>
                     </div>
-                </nav>
-            </div>
-            
-            <!-- User Account Menu (for logged-in users) -->
-            <div class="ml-auto">
-                <!-- <div class="">
+
+                    <!-- Navigation (for Desktop and Mobile) -->
+                    <div class="mr-auto">
+                        <!-- Navbar for mobile devices -->
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li class="active"><a href="dashboard.php" class="nav-link text-left">Beranda</a></li>
+                                <li><a href="dashboard_buku.php" class="nav-link text-left">Buku</a></li>
+                                <li><a href="dashboard_kontak.php" class="nav-link text-left">Bantuan</a></li>
+                            </ul>
+                        </nav>
+
+                        <!-- Mobile Navbar Toggle Button -->
+                        <nav class="navbar navbar-expand-lg navbar-light d-lg-none">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="dashboard.php">Beranda</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="dashboard_buku.php">Buku</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="dashboard_kontak.php">Bantuan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <!-- User Account Menu (for logged-in users) -->
+                    <div class="ml-auto">
+                        <!-- <div class="">
                     <a class="">
                         <span class=""></span>
                     </a>
                 </div> -->
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</header>
+        </header>
 
 
         <!-- Bagian konten utama -->

@@ -49,8 +49,6 @@ $user_id = $_SESSION['user_id'];
             border: none !important;
             box-shadow: none !important;
         }
-
-        
     </style>
 
 </head>
@@ -99,7 +97,9 @@ $user_id = $_SESSION['user_id'];
                 <div class="d-flex align-items-center">
                     <!-- Logo -->
                     <div class="site-logo">
-                        <a href="dashboard.php" class="d-block">BookChapter.</a>
+                        <a href="dashboard.php" class="text-nowrap logo-img">
+                            <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+                        </a>
                     </div>
 
                     <!-- Navigation (for Desktop and Mobile) -->

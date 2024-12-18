@@ -73,7 +73,9 @@ $user_id = $_SESSION['user_id'];
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="site-logo">
-                        <a href="dashboard.php" class="d-block">BookChapter.</a>
+                        <a href="dashboard.php" class="text-nowrap logo-img">
+                            <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+                        </a>
                     </div>
                     <div class="mr-auto">
                         <nav class="site-navigation position-relative text-right" role="navigation">

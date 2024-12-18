@@ -75,9 +75,11 @@ $user_id = $_SESSION['user_id'];
                 <div class="d-flex align-items-center">
                     <!-- Logo -->
                     <div class="site-logo">
-                        <a href="dashboard.php" class="d-block">BookChapter.</a>
+                        <a href="dashboard.php" class="text-nowrap logo-img">
+                            <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
+                        </a>
                     </div>
-                    
+
                     <!-- Navigation (for Desktop and Mobile) -->
                     <div class="mr-auto">
                         <!-- Navbar for mobile devices -->
@@ -109,7 +111,7 @@ $user_id = $_SESSION['user_id'];
                             </div>
                         </nav>
                     </div>
-                    
+
                     <!-- User Account Menu (for logged-in users) -->
                     <div class="ml-auto">
                         <!-- <div class="">
@@ -137,9 +139,6 @@ $user_id = $_SESSION['user_id'];
 
         <div class="site-section pb-0 table-responsive">
             <div class="container">
-                <h2 class="text-center">Upload Hasil Pengerjaan Bab Buku</h2>
-                <p class="text-center">Jika Anda sudah selesai mengerjakan bab buku, unggah hasilnya di sini:</p> <br>
-
                 <?php
                 // Mengambil daftar bab yang sudah dibayar dan dicek apakah sudah diupload atau belum
                 $completed_orders = $conn->query("SELECT orders.order_id, chapters.title 
@@ -189,7 +188,7 @@ $user_id = $_SESSION['user_id'];
                     <p style="color: black;">Tidak ada bab yang dapat diunggah hasil pengerjaannya.</p><br><br>
                 <?php endif; ?>
 
-            </div>
+            </div><br>
         </div>
 
 
