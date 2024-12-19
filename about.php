@@ -80,7 +80,7 @@ session_start(); // Memulai session untuk mengecek status login
         <div class="d-flex align-items-center">
           <!-- Logo -->
           <div class="site-logo">
-            <a href="dashboard.php" class="text-nowrap logo-img">
+            <a href="index.php" class="text-nowrap logo-img">
               <img src="./src/assets/images/logos/logoadmin.svg" width="180" alt="" />
             </a>
           </div>
@@ -162,7 +162,6 @@ session_start(); // Memulai session untuk mengecek status login
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6 mb-5 mb-lg-5">
-
             <div class="feature-1 border person text-center">
               <img src="images/person_1.jpg" alt="Image" class="img-fluid">
               <div class="feature-1-content">

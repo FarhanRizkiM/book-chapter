@@ -121,6 +121,7 @@ $resultBooks = $stmt->get_result();
         /* Pastikan tombol, dropdown, dan input memiliki tinggi yang sama */
         form .form-control,
         form .btn {
+            border-radius: 50px;
             height: calc(2.875rem + 2px);
             /* Samakan tinggi */
             font-size: 1rem;
@@ -184,6 +185,63 @@ $resultBooks = $stmt->get_result();
                 height: calc(2.5rem + 2px);
                 /* Sesuaikan untuk layar kecil */
             }
+
+            .centered-image {
+                max-width: 80%;
+                /* Untuk layar kecil, gambar lebih besar */
+            }
+        }
+
+        /* Kontainer card */
+        .card-container {
+            border: 1px solid #ccc;
+            /* Border card */
+            border-radius: 50px;
+            /* Membuat sudut card melengkung */
+            padding: 20px;
+            /* Padding di dalam card */
+            position: relative;
+            /* Membuat gambar bisa menonjol */
+            background-color: #fff;
+            /* Warna latar card */
+            text-align: center;
+            /* Teks di tengah */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Bayangan lembut */
+        }
+
+        /* Kontainer gambar */
+        .image-container {
+            position: absolute;
+            top: -40px;
+            /* Posisi gambar di atas card */
+            left: 50%;
+            /* Posisi di tengah card */
+            transform: translateX(-50%);
+            /* Menjaga gambar tetap sejajar di tengah */
+        }
+
+        .centered-image {
+            max-width: 80%;
+            /* Batasi lebar gambar maksimal 80% dari card */
+            height: auto;
+            /* Jaga proporsi gambar */
+            margin: -40px auto 20px;
+            /* Sesuaikan margin agar gambar berada di tengah atas card */
+            display: block;
+            /* Memastikan gambar berada di tengah */
+            border: 2px solid #fff;
+            /* Opsional: tambahkan border putih */
+            border-radius: 8px;
+            /* Membuat gambar lebih estetis */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Berikan efek bayangan */
+        }
+
+        /* Isi card */
+        .feature-1-content {
+            margin-top: 50px;
+            /* Jarak isi card dari gambar */
         }
     </style>
 
@@ -326,32 +384,29 @@ $resultBooks = $stmt->get_result();
                     </div>
                 </div>
             </form>
-        </div>
+        </div><br><br><br>  
 
         <div class="site-section pb-0">
             <div class="container">
                 <div class="row">
                     <?php if ($resultBooks->num_rows > 0): ?>
                         <?php while ($row = $resultBooks->fetch_assoc()): ?>
-                            <div class="col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <!-- Gambar Buku -->
-                                            <img src="<?php echo htmlspecialchars($row['image_path']); ?>" class="img-fluid rounded-start" alt="Gambar Buku">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                                                <p class="card-text"><strong>Kategori: </strong><?php echo htmlspecialchars($row['category']); ?></p>
-                                                <p class="card-text"><strong>Deskripsi: </strong><?php echo htmlspecialchars($row['description']); ?></p>
-                                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bookModal<?php echo $row['book_id']; ?>">Detail</a>
-                                            </div>
-
-                                        </div>
+                            <div class="col-lg-4 col-md-6 mb-5">
+                                <div class="feature-1 card-container">
+                                    <!-- Gambar di atas card -->
+                                    <div class="image-container">
+                                        <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Image" class="img-fluid centered-image">
+                                    </div>
+                                    <!-- Isi card -->
+                                    <div class="feature-1-content mt-4"><br><br>
+                                        <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+                                        <span class="position mb-3 d-block">Kategori: <?php echo htmlspecialchars($row['category']); ?></span>
+                                        <p><?php echo htmlspecialchars($row['description']); ?></p>
+                                        <a href="#" class="btn btn-primary btn-sm mt-2" data-toggle="modal" data-target="#bookModal<?php echo $row['book_id']; ?>">Pilih Buku</a>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Modal untuk Detail Buku -->
                             <div class="modal fade" id="bookModal<?php echo $row['book_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel<?php echo $row['book_id']; ?>" aria-hidden="true">
