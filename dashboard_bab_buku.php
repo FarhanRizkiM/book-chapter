@@ -384,7 +384,7 @@ $resultBooks = $stmt->get_result();
                     </div>
                 </div>
             </form>
-        </div><br><br><br>  
+        </div><br><br><br>
 
         <div class="site-section pb-0">
             <div class="container">
@@ -427,7 +427,7 @@ $resultBooks = $stmt->get_result();
                                                             <strong><?php echo htmlspecialchars($chapter['title']); ?></strong><br>
                                                             Deskripsi: <?php echo htmlspecialchars($chapter['description']); ?><br>
                                                             Harga: Rp<?php echo number_format($chapter['price'], 2, ',', '.'); ?><br>
-                                                            <a href="checkout.php?chapter_id=<?php echo $chapter['chapter_id']; ?>" class="btn btn-primary btn-sm mt-2">Checkout</a>
+                                                            <a href="checkout.php?chapter_id=<?php echo $chapter['chapter_id']; ?>" class="btn btn-primary btn-sm mt-2">Checkout</a><br><br>
                                                         </li>
                                                     <?php endforeach; ?>
                                                 </ul>
@@ -449,63 +449,6 @@ $resultBooks = $stmt->get_result();
             </div>
         </div>
 
-
-        <div class="site-section pb-0">
-            <div class="container">
-                <div class="row">
-                    <?php if ($resultBooks->num_rows > 0): ?>
-                        <?php while ($row = $resultBooks->fetch_assoc()): ?>
-                            <div class="col-lg-4 mb-5">
-                                <div class="news-entry-item">
-                                    <h3 class="mb-0">
-                                        <a href="#" class="text-dark" data-toggle="modal" data-target="#bookModal<?php echo $row['book_id']; ?>">
-                                            <?php echo htmlspecialchars($row['title']); ?>
-                                        </a>
-                                    </h3>
-                                    <p><strong>Kategori: </strong><?php echo htmlspecialchars($row['category']); ?></p>
-                                </div>
-                            </div>
-
-                            <!-- Modal untuk detail buku -->
-                            <div class="modal fade" id="bookModal<?php echo $row['book_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel<?php echo $row['book_id']; ?>" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="bookModalLabel<?php echo $row['book_id']; ?>"><?php echo htmlspecialchars($row['title']); ?></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h6>Bab Buku:</h6>
-                                            <?php if (!empty($chapters[$row['book_id']])): ?>
-                                                <ul>
-                                                    <?php foreach ($chapters[$row['book_id']] as $chapter): ?>
-                                                        <li>
-                                                            <strong><?php echo htmlspecialchars($chapter['title']); ?></strong><br>
-                                                            Deskripsi: <?php echo htmlspecialchars($chapter['description']); ?><br>
-                                                            Harga: Rp<?php echo number_format($chapter['price'], 2, ',', '.'); ?><br>
-                                                            <a href="checkout.php?chapter_id=<?php echo $chapter['chapter_id']; ?>" class="btn btn-primary btn-sm mt-2">Checkout</a>
-                                                        </li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            <?php else: ?>
-                                                <p>Tidak ada bab yang tersedia untuk buku ini.</p>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <p class="text-center">Tidak ada buku yang tersedia saat ini.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
 
         <!-- Footer Code Here -->
         <div class="footer">

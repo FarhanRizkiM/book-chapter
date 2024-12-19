@@ -33,6 +33,52 @@ $user_id = $_SESSION['user_id'];
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .order-list {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .order-image img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-content {
+            flex: 1;
+        }
+
+        .chapter-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .upload-form input[type="file"] {
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 20px;
+        }
+    </style>
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -137,59 +183,52 @@ $user_id = $_SESSION['user_id'];
             </div>
         </div>
 
-        <div class="site-section pb-0 table-responsive">
+        <div class="site-section pb-0">
             <div class="container">
                 <?php
-                // Mengambil daftar bab yang sudah dibayar dan dicek apakah sudah diupload atau belum
-                $completed_orders = $conn->query("SELECT orders.order_id, chapters.title 
-                                  FROM orders 
-                                  JOIN chapters ON orders.chapter_id = chapters.chapter_id 
-                                  WHERE orders.user_id = '$user_id' AND orders.status = 'approved'");
+                // Mengambil daftar bab yang sudah dibayar dan dicek apakah sudah diunggah atau belum
+                $completed_orders = $conn->query("SELECT orders.order_id, chapters.title, book_details.image_path 
+                                          FROM orders 
+                                          JOIN chapters ON orders.chapter_id = chapters.chapter_id 
+                                          JOIN book_details ON chapters.book_id = book_details.id 
+                                          WHERE orders.user_id = '$user_id' AND orders.status = 'approved'");
                 ?>
 
                 <?php if ($completed_orders->num_rows > 0): ?>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="text-center">No</th>
-                                <th scope="col" class="text-center">Judul Bab</th>
-                                <th scope="col" class="text-right">Upload Hasil</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php while ($order = $completed_orders->fetch_assoc()): ?>
-                                <?php
-                                // Cek apakah hasil untuk order_id ini sudah diunggah (tanpa user_id)
-                                $order_id = $order['order_id'];
-                                $upload_check = $conn->query("SELECT * FROM uploads WHERE order_id = '$order_id'");
-                                $already_uploaded = $upload_check->num_rows > 0;
-                                ?>
-                                <tr>
-                                    <td class="align-middle text-center"><?= $i++ ?></td>
-                                    <td class="align-middle text-center"><?= htmlspecialchars($order['title']) ?></td>
-                                    <td class="align-middle">
-                                        <?php if ($already_uploaded): ?>
-                                            <span class="text-success">Sudah diunggah</span>
-                                        <?php else: ?>
-                                            <form method="POST" action="dashboard_berhasil_upload_pengerjaan.php" enctype="multipart/form-data" class="d-flex justify-content-between align-items-center">
-                                                <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
-                                                <input type="file" name="completed_chapter" class="form-control-file" style="flex: 1; margin-right: 10px;" required>
-                                                <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-                                            </form>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
-
+                    <div class="order-list">
+                        <?php $i = 1; ?>
+                        <?php while ($order = $completed_orders->fetch_assoc()): ?>
+                            <?php
+                            // Cek apakah hasil untuk order_id ini sudah diunggah
+                            $order_id = $order['order_id'];
+                            $upload_check = $conn->query("SELECT * FROM uploads WHERE order_id = '$order_id'");
+                            $already_uploaded = $upload_check->num_rows > 0;
+                            ?>
+                            <div class="order-item d-flex align-items-center">
+                                <div class="order-image">
+                                    <img src="<?= htmlspecialchars($order['image_path']); ?>" alt="Cover Buku" class="img-fluid rounded">
+                                </div>
+                                <div class="order-content">
+                                    <h5 class="chapter-title"><?= htmlspecialchars($order['title']); ?></h5>
+                                    <?php if ($already_uploaded): ?>
+                                        <span class="text-success">Sudah diunggah</span>
+                                    <?php else: ?>
+                                        <form method="POST" action="dashboard_berhasil_upload_pengerjaan.php" enctype="multipart/form-data" class="upload-form mt-2">
+                                            <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                            <input type="file" name="completed_chapter" class="form-control-file" required>
+                                            <button type="submit" class="btn btn-primary btn-sm mt-2">Unggah</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
                 <?php else: ?>
-                    <p style="color: black;">Tidak ada bab yang dapat diunggah hasil pengerjaannya.</p><br><br>
+                    <h5 class="text-center">Tidak ada bab yang dapat diunggah hasil pengerjaannya.</h5>
                 <?php endif; ?>
+            </div>
+        </div><br><br>
 
-            </div><br>
-        </div>
 
 
 

@@ -33,6 +33,98 @@ $user_id = $_SESSION['user_id'];
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .order-list {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .order-image img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-content {
+            flex: 1;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-number {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .order-status {
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .badge-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .chapter-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .chapter-price {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .actions {
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            border: none;
+            color: #fff;
+            border-radius: 20px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            color: #fff;
+            border-radius: 20px;
+        }
+    </style>
+
+
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -139,56 +231,50 @@ $user_id = $_SESSION['user_id'];
         <div class="site-section pb-0">
             <div class="container">
                 <?php
-                // Mengambil daftar bab yang dibeli user (waiting, approved, rejected)
-                $orders = $conn->query("SELECT orders.order_id, chapters.title, chapters.file_path, orders.status 
-                        FROM orders 
-                        JOIN chapters ON orders.chapter_id = chapters.chapter_id 
-                        WHERE orders.user_id = '$user_id'");
+                // Mengambil daftar bab yang dibeli user
+                $orders = $conn->query("SELECT orders.order_id, chapters.title AS chapter_title, chapters.file_path, chapters.price, orders.status, book_details.image_path 
+                FROM orders 
+                JOIN chapters ON orders.chapter_id = chapters.chapter_id 
+                JOIN book_details ON chapters.book_id = book_details.id 
+                WHERE orders.user_id = '$user_id'");
                 ?>
 
                 <?php if ($orders->num_rows > 0): ?>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="text-center">No</th>
-                                <th scope="col" class="text-center">Judul Bab</th>
-                                <th scope="col" class="text-center">Status</th>
-                                <th scope="col" class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php while ($order = $orders->fetch_assoc()): ?>
-                                <tr>
-                                    <td class="align-middle text-center"><?= $i++ ?></td>
-                                    <td class="align-middle text-center"><?= htmlspecialchars($order['title']) ?></td>
-                                    <td class="align-middle text-center">
-                                        <?php
-                                        if ($order['status'] == 'approved') {
-                                            echo 'Approved';
-                                        } elseif ($order['status'] == 'waiting_confirmation') {
-                                            echo 'Waiting';
-                                        } elseif ($order['status'] == 'rejected') {
-                                            echo 'Rejected';
-                                        }
-                                        ?>
-                                    </td>
-                                    <td class="align-middle text-center">
+                    <div class="order-list">
+                        <?php $i = 1; ?>
+                        <?php while ($order = $orders->fetch_assoc()): ?>
+                            <div class="order-item d-flex flex-wrap align-items-center">
+                                <div class="order-image">
+                                    <img src="<?= htmlspecialchars($order['image_path']); ?>" alt="Cover Buku" class="img-fluid rounded">
+                                </div>
+                                <div class="order-content">
+                                    <div class="order-header d-flex justify-content-between">
+                                        <span class="order-number">Pesanan #<?= $i++ ?></span>
+                                        <span class="order-status badge 
+                                    <?= $order['status'] == 'approved' ? 'badge-success' : ($order['status'] == 'waiting_confirmation' ? 'badge-warning' : 'badge-danger') ?>">
+                                            <?= ucfirst($order['status']); ?>
+                                        </span>
+                                    </div>
+                                    <h5 class="chapter-title mt-2"><?= htmlspecialchars($order['chapter_title']); ?></h5>
+                                    <p class="chapter-price">Harga: Rp<?= number_format($order['price'], 2, ',', '.'); ?></p>
+                                    <div class="actions mt-3">
                                         <?php if ($order['status'] == 'approved'): ?>
-                                            <a href="<?= htmlspecialchars($order['file_path']) ?>" class="btn btn-primary btn-sm" download>Unduh Bab Buku</a>
+                                            <a href="<?= htmlspecialchars($order['file_path']); ?>" class="btn btn-primary btn-sm" download>Unduh Bab Buku</a>
                                         <?php else: ?>
                                             <span class="btn btn-secondary btn-sm disabled">Unduh Bab Buku</span>
                                         <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
                 <?php else: ?>
-                    <p style="color: black;">Belum ada bab yang dapat diunduh. Pastikan pembayaran Anda sudah diverifikasi.</p><br><br>
+                    <h5 class="text-center">Belum ada bab yang dapat diunduh. Pastikan pembayaran Anda sudah diverifikasi.</h5>
                 <?php endif; ?>
             </div>
-        </div>
+        </div><br><br><br>
+
+
 
         <!-- Footer -->
         <div class="footer">
