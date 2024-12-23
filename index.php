@@ -23,6 +23,44 @@ session_start(); // Memulai session untuk mengecek status login
   <link rel="stylesheet" href="css/aos.css">
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .footer {
+      background-color: #1f3c88;
+      /* Warna latar belakang */
+      padding: 30px 0;
+      /* Menambah padding vertikal */
+      color: #ffffff;
+      /* Warna teks */
+      text-align: center;
+      font-size: 1rem;
+      /* Ukuran teks lebih besar */
+      line-height: 1.8;
+      /* Jarak antar baris */
+      margin-top: 20px;
+      /* Jarak dari konten di atas */
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      /* Tambahkan bayangan untuk efek */
+    }
+
+    .footer p {
+      margin: 0;
+      /* Hapus margin default */
+      padding: 0;
+    }
+
+    .footer a {
+      color: #ffffff;
+      /* Warna teks tautan */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      color: #ffc107;
+      /* Warna hover untuk tautan */
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -257,20 +295,17 @@ session_start(); // Memulai session untuk mengecek status login
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="copyright">
-              <p>
-                <a href="#" class="d-block" style="text-decoration: none;">
-                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                  Copyright &copy;<script>
-                    document.write(new Date().getFullYear());
-                  </script> All rights reserved | BookChapter.</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-              </p>
-            </div>
+            <p>
+              Copyright &copy;<script>
+                document.write(new Date().getFullYear());
+              </script>
+              All rights reserved | <a href="#" style="color: #ffffff; text-decoration: none;">BookChapter</a>.
+            </p>
           </div>
         </div>
       </div>
     </div>
+
   </div>
   <!-- .site-wrap -->
 
