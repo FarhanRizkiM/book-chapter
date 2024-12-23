@@ -43,14 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 
 <head>
-    <title>Book Chapter &mdash; </title>
+    <title>Book Chapter | Upload Payment</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logo_bc.png" />
+    <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -109,11 +107,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            background-color: #002a5c;
-            color: white;
+            background-color: #1f3c88;
+            /* Warna latar belakang */
+            padding: 30px 0;
+            /* Menambah padding vertikal */
+            color: #ffffff;
+            /* Warna teks */
             text-align: center;
+            font-size: 1rem;
+            /* Ukuran teks lebih besar */
+            line-height: 1.8;
+            /* Jarak antar baris */
+            margin-top: 20px;
+            /* Jarak dari konten di atas */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            /* Tambahkan bayangan untuk efek */
+        }
+
+        .footer p {
+            margin: 0;
+            /* Hapus margin default */
+            padding: 0;
+        }
+
+        .footer a {
+            color: #ffffff;
+            /* Warna teks tautan */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #ffc107;
+            /* Warna hover untuk tautan */
+            text-decoration: underline;
         }
 
         input[type="file"] {
@@ -215,8 +242,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
 
-
-
         <div class="site-section">
             <div class="container">
                 <div class="upload-container">
@@ -241,16 +266,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="copyright">
-                            <p>
-                                <a href="#" class="d-block" style="text-decoration: none;">
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | BookChapter.</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
+                        <p>
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | <a href="#" style="color: #ffffff; text-decoration: none;">BookChapter</a>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -261,10 +282,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <!-- loader -->
-    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <div id="loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78" />
-        </svg></div>
+        </svg>
+    </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -280,10 +303,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-
-
     <script src="js/main.js"></script>
 
 </body>

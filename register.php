@@ -76,12 +76,11 @@ ob_end_flush(); // Akhiri output buffering
 <html lang="en">
 
 <head>
-  <title>Academics &mdash; Website by Colorlib</title>
+  <title>Book Chapter | Register</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/jquery-ui.css">
@@ -94,14 +93,11 @@ ob_end_flush(); // Akhiri output buffering
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
   <div class="site-wrap">
-
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
@@ -110,7 +106,6 @@ ob_end_flush(); // Akhiri output buffering
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-
 
     <div class="py-2 bg-light">
       <div class="container">
@@ -134,7 +129,6 @@ ob_end_flush(); // Akhiri output buffering
         </div>
       </div>
     </div>
-
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
@@ -216,11 +210,30 @@ ob_end_flush(); // Akhiri output buffering
   <!-- .site-wrap -->
 
   <!-- loader -->
-  <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+  <div id="loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78" />
-    </svg></div>
+    </svg>
+  </div>
 
+  <script>
+    // Validasi sebelum submit form
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      const password = document.getElementById("pword").value;
+      const password2 = document.getElementById("pword2").value;
+
+      if (password !== password2) {
+        event.preventDefault(); // Menghentikan submit form jika password tidak cocok
+
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Password dan Re-type Password tidak cocok!"
+        });
+      }
+    });
+  </script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
@@ -239,26 +252,7 @@ ob_end_flush(); // Akhiri output buffering
   <!-- jQuery, Bootstrap, dan SweetAlert2 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
   <script src="js/main.js"></script>
-  <script>
-    // Validasi sebelum submit form
-    document.getElementById("registerForm").addEventListener("submit", function(event) {
-      const password = document.getElementById("pword").value;
-      const password2 = document.getElementById("pword2").value;
-
-      if (password !== password2) {
-        event.preventDefault(); // Menghentikan submit form jika password tidak cocok
-
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Password dan Re-type Password tidak cocok!"
-        });
-      }
-    });
-  </script>
 
 </body>
 

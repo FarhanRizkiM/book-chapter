@@ -43,11 +43,11 @@ $conn->close();
 <html lang="en">
 
 <head>
-  <title>Login User</title>
+  <title>Book Chapter | Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/jquery-ui.css">
@@ -97,7 +97,7 @@ $conn->close();
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-5">
-            <form action="login.php" method="POST"> 
+            <form action="login.php" method="POST">
               <?php if (!empty($error_message)) : ?>
                 <div class="alert alert-danger"><?php echo $error_message; ?></div>
               <?php endif; ?>

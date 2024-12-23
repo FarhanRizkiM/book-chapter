@@ -94,32 +94,24 @@
     <html lang="en">
 
     <head>
-        <title>Book Chapter &mdash; Buku</title>
+        <title>Book Chapter | Dashboard Bab Buku</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
         <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
         <link rel="stylesheet" href="fonts/icomoon/style.css">
-        <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logo_bc.png" />
+        <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
         <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
         <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
         <link rel="stylesheet" href="css/aos.css">
         <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
         <style>
             /* Pastikan elemen di baris sejajar vertikal */
             form .row.g-3>div {
@@ -261,6 +253,43 @@
                 flex-direction: column;
                 justify-content: space-between;
                 text-align: center;
+            }
+
+            .footer {
+                background-color: #1f3c88;
+                /* Warna latar belakang */
+                padding: 30px 0;
+                /* Menambah padding vertikal */
+                color: #ffffff;
+                /* Warna teks */
+                text-align: center;
+                font-size: 1rem;
+                /* Ukuran teks lebih besar */
+                line-height: 1.8;
+                /* Jarak antar baris */
+                margin-top: 20px;
+                /* Jarak dari konten di atas */
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                /* Tambahkan bayangan untuk efek */
+            }
+
+            .footer p {
+                margin: 0;
+                /* Hapus margin default */
+                padding: 0;
+            }
+
+            .footer a {
+                color: #ffffff;
+                /* Warna teks tautan */
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .footer a:hover {
+                color: #ffc107;
+                /* Warna hover untuk tautan */
+                text-decoration: underline;
             }
         </style>
 
@@ -475,22 +504,17 @@
                 </div>
             </div>
 
-
-            <!-- Footer Code Here -->
+            <!-- Footer -->
             <div class="footer">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="copyright">
-                                <p>
-                                    <a href="#" class="d-block" style="text-decoration: none;">
-                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                        Copyright &copy;<script>
-                                            document.write(new Date().getFullYear());
-                                        </script> All rights reserved | BookChapter.</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                </p>
-                            </div>
+                            <p>
+                                Copyright &copy;<script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                                All rights reserved | <a href="#" style="color: #ffffff; text-decoration: none;">BookChapter</a>.
+                            </p>
                         </div>
                     </div>
                 </div>

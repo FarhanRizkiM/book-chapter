@@ -11,12 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
 
 <head>
-    <title>Book Chapter &mdash; </title>
+    <title>Book Chapter | Confirmation Payment</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
     <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
@@ -77,11 +76,40 @@ if (!isset($_SESSION['user_id'])) {
         }
 
         .footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            background-color: #002a5c;
-            color: white;
+            background-color: #1f3c88;
+            /* Warna latar belakang */
+            padding: 30px 0;
+            /* Menambah padding vertikal */
+            color: #ffffff;
+            /* Warna teks */
             text-align: center;
+            font-size: 1rem;
+            /* Ukuran teks lebih besar */
+            line-height: 1.8;
+            /* Jarak antar baris */
+            margin-top: 20px;
+            /* Jarak dari konten di atas */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            /* Tambahkan bayangan untuk efek */
+        }
+
+        .footer p {
+            margin: 0;
+            /* Hapus margin default */
+            padding: 0;
+        }
+
+        .footer a {
+            color: #ffffff;
+            /* Warna teks tautan */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #ffc107;
+            /* Warna hover untuk tautan */
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -199,16 +227,12 @@ if (!isset($_SESSION['user_id'])) {
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="copyright">
-                            <p>
-                                <a href="#" class="d-block" style="text-decoration: none;">
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | BookChapter.</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
+                        <p>
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | <a href="#" style="color: #ffffff; text-decoration: none;">BookChapter</a>.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -9,30 +9,20 @@ session_start(); // Memulai session untuk mengecek status login
   <title>Book Chapter</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logo_bc.png" />
+  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
   <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
   <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
   <link rel="stylesheet" href="css/aos.css">
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
   <link rel="stylesheet" href="css/style.css">
-
-
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -108,8 +98,6 @@ session_start(); // Memulai session untuk mengecek status login
               </div>
             </nav>
           </div>
-
-          <!-- User Account Menu -->
         </div>
       </div>
     </header>
@@ -170,10 +158,8 @@ session_start(); // Memulai session untuk mengecek status login
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6">
-
             <div class="feature-1">
               <div class="icon-wrapper bg-primary">
-
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
                   <path fill-rule="evenodd" d="M0 14.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z" />
@@ -217,12 +203,9 @@ session_start(); // Memulai session untuk mengecek status login
               </div>
             </div>
           </div>
-
           <div class="col-lg-4 col-md-6">
-
             <div class="feature-1">
               <div class="icon-wrapper bg-primary">
-
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2.5 4l10-3A1.5 1.5 0 0 1 14 2.5v2h-1v-2a.5.5 0 0 0-.5-.5L5.833 4H2.5z" />
                   <path fill-rule="evenodd" d="M1 5.5A1.5 1.5 0 0 1 2.5 4h11A1.5 1.5 0 0 1 15 5.5v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-8zM2.5 5a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-11z" />
@@ -265,7 +248,6 @@ session_start(); // Memulai session untuk mengecek status login
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -289,8 +271,6 @@ session_start(); // Memulai session untuk mengecek status login
         </div>
       </div>
     </div>
-
-
   </div>
   <!-- .site-wrap -->
 

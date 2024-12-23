@@ -6,39 +6,27 @@ session_start(); // Memulai session untuk mengecek status login
 <html lang="en">
 
 <head>
-  <title>Book Chapter &mdash; About</title>
+  <title>Book Chapter | About</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logo_bc.png" />
+  <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
   <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
   <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
   <link rel="stylesheet" href="css/aos.css">
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
   <link rel="stylesheet" href="css/style.css">
-
-
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
   <div class="site-wrap">
-
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
@@ -133,8 +121,6 @@ session_start(); // Memulai session untuk mengecek status login
       </div>
     </div>
 
-
-
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -144,8 +130,6 @@ session_start(); // Memulai session untuk mengecek status login
           <div class="col-lg-5 ml-auto">
             <span class="caption">Tentang Kami</span>
             <h2 class="title-with-line">Akses Mudah ke Bab Buku yang Anda Butuhkan</h2>
-
-
             <p class="mb-4">BookChapter adalah platform digital yang menyediakan akses ke bab-bab pilihan dari berbagai buku berkualitas. Kami memahami bahwa setiap orang memiliki kebutuhan literasi yang berbeda. Dengan BookChapter, Anda dapat membeli bab spesifik dari buku tanpa harus membeli seluruh buku, sehingga Anda bisa fokus pada topik yang paling relevan dengan kebutuhan Anda.</p>
           </div>
         </div>
@@ -191,16 +175,9 @@ session_start(); // Memulai session untuk mengecek status login
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
-
-
-
-
-
 
     <!-- // 05 - Block -->
     <div class="section-bg style-1" style="background-image: url('images/hero_1.jpg');">
@@ -214,7 +191,6 @@ session_start(); // Memulai session untuk mengecek status login
 
 
         <div class="owl-slide owl-carousel owl-testimonial">
-
           <div class="ftco-testimonial-1">
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="images/person_1.jpg" alt="Image" class="img-fluid mr-3">
@@ -227,7 +203,6 @@ session_start(); // Memulai session untuk mengecek status login
               <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
             </div>
           </div>
-
           <div class="ftco-testimonial-1">
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="images/person_2.jpg" alt="Image" class="img-fluid mr-3">
@@ -318,17 +293,17 @@ session_start(); // Memulai session untuk mengecek status login
         </div>
       </div>
     </div>
-
-
   </div>
   <!-- .site-wrap -->
 
 
   <!-- loader -->
-  <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+  <div id="loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78" />
-    </svg></div>
+    </svg>
+  </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -344,10 +319,6 @@ session_start(); // Memulai session untuk mengecek status login
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-
-
   <script src="js/main.js"></script>
 
 </body>
