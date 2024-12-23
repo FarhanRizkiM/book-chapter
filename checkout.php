@@ -27,26 +27,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+    <link rel="shortcut icon" type="image/png" href="./src/assets/images/logos/logo_bc.png" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
     <link rel="stylesheet" href="css/aos.css">
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .checkout-container {
+            text-align: center;
+            padding: 50px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        .checkout-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
+        .bank-details {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
+        .bank-details span {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .btn-modern {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-modern:hover {
+            background-color: #45a049;
+        }
+
+        .bank-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            background-color: #002a5c;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -139,33 +189,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
 
-
-
-        <div class="site-section">
-            <div class="container">
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <h5>Silakan lakukan pembayaran ke nomor rekening berikut: <br>
-
-                            Bank ABC - 1234567890 (atas nama Book Chapter App)</h5>
-                        <form method="POST"><br>
-                            <button type="submit" class="btn btn-primary btn-lg px-5">Saya Sudah Membayar</button>
-                        </form>
-                    </div>
-                </div>
+        <div class="container mt-5">
+            <div class="checkout-container">
+                <!-- Ikon bank -->
+                <i class="fas fa-university bank-icon"></i>
+                <h2 class="checkout-title">Pembayaran Bab Buku</h2>
+                <p class="bank-details">
+                    Silakan lakukan pembayaran ke nomor rekening berikut:
+                    <br><span><strong>Bank ABC</strong> - 1234567890</span>
+                    <span><strong>Atas Nama:</strong> Book Chapter App</span>
+                </p>
+                <form method="POST">
+                    <button type="submit" class="btn-modern">Saya Sudah Membayar</button>
+                </form>
             </div>
         </div>
-
 
         <!-- Footer -->
         <div class="footer">

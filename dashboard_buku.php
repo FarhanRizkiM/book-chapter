@@ -34,23 +34,59 @@ $user_id = $_SESSION['user_id'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .card-icon {
-            font-size: 48px;
-            /* Ukuran ikon */
-            color: #555;
-            /* Warna ikon */
-            margin-bottom: 15px;
-            /* Jarak antara ikon dan judul card */
-            display: block;
-            /* Pastikan ikon memiliki satu baris penuh */
+        .dashboard-card {
+            text-align: center;
+            background-color: rgb(243, 243, 243);
+            border-radius: 10px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .card {
-            border: none !important;
-            box-shadow: none !important;
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-icon {
+            font-size: 50px;
+            color: rgb(6, 97, 194);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-text {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-dashboard {
+            background-color: #0056b3;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-dashboard:hover {
+            background-color: #007bff;
+            color: #ffffff;
+            /* Pastikan warna tetap kontras */
+        }
+
+        .dashboard-container {
+            margin-top: 50px;
         }
     </style>
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -161,55 +197,41 @@ $user_id = $_SESSION['user_id'];
         </div>
 
 
-        <div class="site-section pb-0">
+        <div class="site-section">
             <div class="container">
-
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="row dashboard-container">
                     <!-- Card 1 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <i class="fas fa-book-open card-icon"></i><br>
-                                <h5 class="card-title text-dark">Daftar Bab Buku</h5>
-                                <p class="card-text">Temukan berbagai bab buku dari beragam kategori. Pilih bab yang sesuai keinginan anda.</p>
-                            </div>
-                            <div class="card-body">
-                                <a href="dashboard_bab_buku.php" class="btn btn-primary">Selengkapnya</a>
-                            </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-card">
+                            <i class="fas fa-book-open dashboard-icon"></i>
+                            <h3 class="dashboard-title">Daftar Bab Buku</h3>
+                            <p class="dashboard-text">Telusuri bab buku dari berbagai kategori. Pilih yang sesuai kebutuhan Anda.</p>
+                            <a href="dashboard_bab_buku.php" class="btn-dashboard">Selengkapnya</a>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <i class="fas fa-shopping-cart card-icon"></i><br>
-                                <h5 class="card-title text-dark">Bab Buku yang sudah Dibeli</h5>
-                                <p class="card-text">Akses bab-bab yang sudah Anda beli kapan saja. Semua tersedia di satu tempat untuk kemudahan Anda.</p>
-                            </div>
-                            <div class="card-body">
-                                <a href="dashboard_buku_dibeli.php" class="btn btn-primary">Selengkapnya</a>
-                            </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-card">
+                            <i class="fas fa-shopping-cart dashboard-icon"></i>
+                            <h3 class="dashboard-title">Bab Buku yang Dibeli</h3>
+                            <p class="dashboard-text">Lihat semua bab buku yang sudah Anda beli sebelumnya. Akses kapan saja.</p>
+                            <a href="dashboard_buku_dibeli.php" class="btn-dashboard">Selengkapnya</a>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <i class="fas fa-upload card-icon"></i><br>
-                                <h5 class="card-title text-dark">Upload Hasil Pengerjaan</h5>
-                                <p class="card-text">Unggah hasil pengerjaan atau catatan dari bab yang Anda pelajari untuk referensi atau penyimpanan.</p>
-                            </div>
-                            <div class="card-body">
-                                <a href="dashboard_upload_pengerjaan.php" class="btn btn-primary">Selengkapnya</a>
-                            </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-card">
+                            <i class="fas fa-upload dashboard-icon"></i>
+                            <h3 class="dashboard-title">Upload Hasil Pengerjaan</h3>
+                            <p class="dashboard-text">Unggah hasil pekerjaan atau catatan dari bab yang telah Anda pelajari.</p>
+                            <a href="dashboard_upload_pengerjaan.php" class="btn-dashboard">Selengkapnya</a>
                         </div>
                     </div>
-                </div><br><br>
-
+                </div>
             </div>
-        </div>
+        </div><br><br><br>
 
         <!-- Footer -->
         <div class="footer">

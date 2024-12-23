@@ -32,6 +32,88 @@ $user_id = $_SESSION['user_id'];
     <link rel="stylesheet" href="css/aos.css">
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            /* Agar gambar mempertahankan rasio aslinya */
+            object-fit: contain;
+            /* Menampilkan gambar penuh tanpa memotong */
+            border-radius: 10px 10px 0 0;
+            background-color: #f8f9fa;
+            /* Tambahkan latar belakang jika gambar tidak memenuhi card */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            min-height: 150px;
+            /* Atur tinggi minimum untuk bagian konten */
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: normal;
+        }
+
+        .text-muted {
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .text-danger {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+
+        .btn-sm {
+            margin-top: auto;
+            /* Agar tombol berada di bagian bawah card */
+        }
+
+        .footer {
+            background-color: #1f3c88;
+            /* Warna latar belakang */
+            padding: 10px 0;
+            /* Kurangi padding vertikal */
+            color: #ffffff;
+            /* Warna teks */
+            text-align: center;
+            font-size: 0.9rem;
+            /* Ukuran teks lebih kecil */
+            line-height: 1.5;
+            /* Jarak antar baris */
+            margin-top: 20px;
+            /* Tambahkan jarak dari konten di atas */
+        }
+
+        .footer p {
+            margin: 0;
+            /* Hapus margin default */
+            padding: 0;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -151,24 +233,60 @@ $user_id = $_SESSION['user_id'];
             </div>
         </div>
 
+        <div class="site-section">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="font-weight-bold">Daftar Pilihan Buku</h3>
+                    <a href="dashboard_bab_buku.php" class="btn btn-primary px-4 py-2">Lihat Semua</a>
+                </div>
+                <div class="row">
+                    <?php
+                    // Query untuk mengambil data buku dari tabel `book_details`
+                    $sqlBooks = "SELECT id, category, title, image_path, description FROM book_details LIMIT 4";
+                    $resultBooks = $conn->query($sqlBooks);
+
+                    if ($resultBooks->num_rows > 0):
+                        while ($row = $resultBooks->fetch_assoc()):
+                    ?>
+                            <div class="col-md-3 mb-4">
+                                <div class="card border-0 shadow-sm">
+                                    <!-- Gambar Buku -->
+                                    <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="card-img-top">
+
+                                    <!-- Detail Buku -->
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+                                        <p class="text-danger"><?= htmlspecialchars($row['category']) ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        endwhile;
+                    else:
+                        ?>
+                        <p class="text-center">No books available at the moment.</p>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Footer -->
         <div class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="copyright">
-                            <p>
-                                <a href="#" class="d-block" style="text-decoration: none;">
-                                    Copyright &copy;<script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | BookChapter.
-                                </a>
-                            </p>
-                        </div>
+                        <p>
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | <a href="#" style="color: #ffffff; text-decoration: none;">BookChapter</a>.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- loader -->

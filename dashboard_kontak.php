@@ -5,7 +5,7 @@ require 'db.php';
 
 // Cek jika pengguna belum login, arahkan ke login.html
 if (!isset($_SESSION['user_id'])) {
-  header("Location: login.html");
+  header("Location: login.php");
   exit();
 }
 
@@ -77,8 +77,8 @@ $user_id = $_SESSION['user_id'];
               </div>
             <?php else: ?>
               <!-- Jika belum login, tampilkan tombol login dan register -->
-              <a href="login.html" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
-              <a href="register.html" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
+              <a href="login.php" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
+              <a href="register.php" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
             <?php endif; ?>
           </div>
         </div>

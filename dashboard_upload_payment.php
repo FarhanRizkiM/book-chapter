@@ -56,20 +56,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
     <link rel="stylesheet" href="css/aos.css">
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .upload-container {
+            text-align: center;
+            padding: 50px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
 
+        .upload-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
+        .upload-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
+        .upload-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .btn-upload {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            background-color: #002a5c;
+            color: white;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            font-size: 1rem;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -166,24 +219,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="site-section">
             <div class="container">
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <form method="POST" enctype="multipart/form-data">
-                            Upload Bukti Pembayaran (PNG, JPG, JPEG): <input type="file" name="payment_proof" required><br><br>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                        <!-- <a href="dashboard_bab_buku.php" class="btn btn-danger">Kembali</a> -->
-                    </div>
+                <div class="upload-container">
+                    <!-- Ikon Upload -->
+                    <i class="fas fa-file-upload upload-icon"></i>
+                    <h2 class="upload-title">Upload Bukti Pembayaran</h2>
+                    <p class="upload-description">
+                        Unggah bukti pembayaran Anda dalam format PNG, JPG, atau JPEG.
+                        <br>Pastikan file tidak melebihi ukuran maksimum yang diizinkan.
+                    </p>
+                    <form method="POST" enctype="multipart/form-data">
+                        <input type="file" name="payment_proof" accept="image/png, image/jpg, image/jpeg" required>
+                        <button type="submit" class="btn-upload">Upload</button>
+                    </form>
                 </div>
             </div>
         </div>

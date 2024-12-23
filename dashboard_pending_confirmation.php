@@ -18,26 +18,72 @@ if (!isset($_SESSION['user_id'])) {
 
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
     <link rel="stylesheet" href="css/aos.css">
     <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .confirmation-container {
+            text-align: center;
+            padding: 50px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
 
+        .confirmation-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
 
+        .confirmation-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
+        .confirmation-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .btn-dashboard {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-dashboard:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            background-color: #002a5c;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -134,23 +180,15 @@ if (!isset($_SESSION['user_id'])) {
 
         <div class="site-section">
             <div class="container">
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-                <div class="row">
-
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <h1>Pembayaran dalam Proses Verifikasi</h1>
-                        <p>Terima kasih, bukti pembayaran Anda sedang diverifikasi oleh admin. Silakan cek kembali nanti.</p>
-                        <a href="dashboard_buku.php" class="btn btn-primary">Kembali ke Dashboard</a>
-                        <!-- <a href="dashboard_bab_buku.php" class="btn btn-danger">Kembali</a> -->
-                    </div>
+                <div class="confirmation-container">
+                    <!-- Ikon Konfirmasi -->
+                    <i class="fas fa-check-circle confirmation-icon"></i>
+                    <h2 class="confirmation-title">Pembayaran dalam Proses Verifikasi</h2>
+                    <p class="confirmation-description">
+                        Terima kasih! Bukti pembayaran Anda sedang diverifikasi oleh admin.
+                        <br>Silakan cek kembali nanti untuk konfirmasi status pembayaran Anda.
+                    </p>
+                    <a href="dashboard_buku.php" class="btn-dashboard">Kembali ke Dashboard</a>
                 </div>
             </div>
         </div>
