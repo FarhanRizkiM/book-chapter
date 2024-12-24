@@ -92,8 +92,8 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
-  <link rel="shortcut icon" type="image/png" href="../src/assets/images/logos/logo_bc.png" />
+  <title>Book Chapter | Kategori Buku</title>
+  <link rel="shortcut icon" type="image/png" href="../src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="../src/assets/css/styles.min.css" />
 </head>
 
@@ -194,12 +194,11 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../src/assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <i class="ti ti-user fs-6"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
                       <!-- Menampilkan nama admin dari session -->
                       <p class="mb-0 fs-3"><?php echo isset($_SESSION['admin_full_name']) ? $_SESSION['admin_full_name'] : 'Admin'; ?></p>
                     </a>
