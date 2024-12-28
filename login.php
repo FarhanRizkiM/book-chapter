@@ -135,7 +135,7 @@ $conn->close();
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-5">
-            <form action="login.php" method="POST">
+            <form method="POST">
               <?php if (!empty($error_message)) : ?>
                 <div class="alert alert-danger"><?php echo $error_message; ?></div>
               <?php endif; ?>

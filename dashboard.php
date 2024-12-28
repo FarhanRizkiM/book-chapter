@@ -5,7 +5,7 @@ require 'db.php';
 
 // Cek jika pengguna belum login, arahkan ke login.html
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 
