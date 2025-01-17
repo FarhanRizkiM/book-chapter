@@ -71,13 +71,6 @@ $user_id = $_SESSION['user_id'];
             margin-top: 10px;
         }
 
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            border-radius: 20px;
-        }
-
         .footer {
             background-color: #1f3c88;
             /* Warna latar belakang */
