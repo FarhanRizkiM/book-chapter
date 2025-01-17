@@ -48,6 +48,30 @@ $result_history = $conn->query($sql_history);
   <title>Book Chapter | Pembayaran</title>
   <link rel="shortcut icon" type="image/png" href="../src/assets/images/logos/logobuku.png" />
   <link rel="stylesheet" href="../src/assets/css/styles.min.css" />
+  <style>
+    .view-proof-btn {
+      text-decoration: none;
+      /* Menghilangkan garis bawah */
+      padding: 0;
+      /* Menghilangkan padding bawaan tombol */
+      margin: 0;
+      /* Menghilangkan margin bawaan */
+      font-size: 14px;
+      /* Menyesuaikan ukuran teks */
+    }
+
+    .view-proof-btn:hover {
+      text-decoration: underline;
+      /* Garis bawah hanya saat hover */
+      cursor: pointer;
+    }
+
+    td {
+      vertical-align: middle;
+      /* Menyesuaikan posisi vertikal konten */
+    }
+  </style>
+
 </head>
 
 <body>
@@ -243,11 +267,18 @@ $result_history = $conn->query($sql_history);
                                 <td><?= $row['order_date'] ?></td>
                                 <td>
                                   <?php if (file_exists('../' . $row['payment_proof_path'])): ?>
-                                    <a href="../<?= htmlspecialchars($row['payment_proof_path']) ?>" target="_blank">View Proof</a>
+                                    <button type="button" class="btn btn-link text-primary view-proof-btn"
+                                      style="text-decoration: none;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#viewProofModal"
+                                      data-proof-path="../<?= htmlspecialchars($row['payment_proof_path']) ?>">
+                                      View Proof
+                                    </button>
                                   <?php else: ?>
                                     <span style="color: red;">Proof Not Found</span>
                                   <?php endif; ?>
                                 </td>
+
                                 <td><?= $row['status'] ?></td>
                               </tr>
                             <?php endwhile; ?>
@@ -266,7 +297,33 @@ $result_history = $conn->query($sql_history);
       </div>
     </div>
   </div>
+
+  <!-- Modal untuk View Proof -->
+  <div class="modal fade" id="viewProofModal" tabindex="-1" aria-labelledby="viewProofModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewProofModalLabel">Payment Proof</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="proofImage" src="" alt="Payment Proof" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    document.querySelectorAll('.view-proof-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const proofPath = this.getAttribute('data-proof-path');
+        document.getElementById('proofImage').src = proofPath;
+      });
+    });
+
     function confirmLogout(event) {
       // Mencegah aksi default tombol
       event.preventDefault();
