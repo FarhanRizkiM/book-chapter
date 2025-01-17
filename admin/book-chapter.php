@@ -60,6 +60,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     header("Location: book-chapter.php");
     exit;
+  } elseif ($action == 'edit') {
+    $chapter_id = $_POST['chapter_id'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $category_id = $_POST['category_id'];
+
+    // Jika ada file baru yang diunggah
+    if (!empty($_FILES['chapter_file']['name'])) {
+      $file_name = str_replace(' ', '_', basename($_FILES['chapter_file']['name']));
+      $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+      $allowed_types = ['docx'];
+
+      if (!in_array($file_type, $allowed_types)) {
+        $_SESSION['error'] = "Hanya file DOCX yang diperbolehkan.";
+        header("Location: book-chapter.php");
+        exit;
+      }
+
+      $upload_dir = '../uploads/chapters/';
+      $file_path = $upload_dir . $file_name;
+      if (!move_uploaded_file($_FILES['chapter_file']['tmp_name'], $file_path)) {
+        $_SESSION['error'] = "Gagal mengunggah file bab buku.";
+        header("Location: book-chapter.php");
+        exit;
+      }
+
+      $file_path_db = 'uploads/chapters/' . $file_name;
+    } else {
+      // Jika tidak ada file baru, gunakan file yang sudah ada
+      $file_path_db = $_POST['existing_file_path'];
+    }
+
+    // Update data di database
+    $stmt = $conn->prepare("UPDATE chapters SET book_id = ?, title = ?, description = ?, price = ?, file_path = ? WHERE chapter_id = ?");
+    $stmt->bind_param("issdsi", $category_id, $title, $description, $price, $file_path_db, $chapter_id);
+
+    if ($stmt->execute()) {
+      $_SESSION['success'] = "Bab buku berhasil diperbarui!";
+    } else {
+      $_SESSION['error'] = "Error: " . $stmt->error;
+    }
+    $stmt->close();
+
+    header("Location: book-chapter.php");
+    exit;
   } elseif ($action == 'delete') {
     $chapter_id = $_POST['chapter_id'];
     $stmt = $conn->prepare("DELETE FROM chapters WHERE chapter_id = ?");
@@ -228,37 +274,42 @@ $book_count = $conn->query("SELECT COUNT(*) as total_book FROM chapters")->fetch
                   <p class="card-text">Total Buku: <?php echo $book_count; ?></p>
                 </div>
               </div><br>
-              <h4 class="card-title fw-semibold mb-3">Form Input Bab Buku</h4>
+              <h4 class="card-title fw-semibold mb-3">Form Input dan Edit Bab Buku</h4>
               <div class="card">
                 <div class="card-body p-3">
                   <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="chapter_id" id="chapter_id">
+                    <input type="hidden" name="existing_file_path" id="existing_file_path">
                     <div class="mb-3">
                       <label for="title">Judul Bab Buku</label>
-                      <input type="text" class="form-control" id="title" name="title" placeholder="Judul Bab Buku" required>
+                      <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="mb-3">
                       <label for="description">Deskripsi</label>
-                      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Deskripsi" required></textarea>
+                      <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
                       <label for="price">Harga</label>
-                      <input type="number" class="form-control" id="price" name="price" placeholder="Harga" required>
+                      <input type="number" class="form-control" id="price" name="price" required>
                     </div>
                     <div class="mb-3">
                       <label for="chapter_file">File Bab (.docx)</label>
-                      <input type="file" class="form-control" id="chapter_file" name="chapter_file" required>
+                      <input type="file" class="form-control" id="chapter_file" name="chapter_file">
                     </div>
                     <div class="mb-3">
                       <label for="category_id">Pilih Judul Buku</label>
                       <select class="form-select" id="category_id" name="category_id" required>
-                        <option value="">Judul Buku</option>
+                        <option value="">Pilih Judul Buku</option>
                         <?php while ($category = $categories->fetch_assoc()): ?>
                           <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['title']) ?></option>
                         <?php endwhile; ?>
                       </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="action" value="add">Tambah Bab</button>
+                    <button type="submit" class="btn btn-primary" id="submit-button" name="action" value="add">Tambah Bab</button>
+                    <button type="button" class="btn btn-secondary d-none" id="clear-button">Clear Data</button>
+                    <button type="submit" class="btn btn-danger d-none" id="edit-button" name="action" value="edit">Edit Bab</button>
                   </form>
+
                 </div>
               </div>
               <h4 class="card-title fw-semibold mb-3">Daftar Bab Buku</h4>
@@ -284,14 +335,24 @@ $book_count = $conn->query("SELECT COUNT(*) as total_book FROM chapters")->fetch
                             <td><?= htmlspecialchars($chapter['category_title']) ?></td>
                             <td><?= htmlspecialchars($chapter['title']) ?></td>
                             <td><?= htmlspecialchars($chapter['description']) ?></td>
-                            <td>Rp<?= number_format($chapter['price'], 2, ',', '.') ?></td>
+                            <td><?= number_format($chapter['price'], 2, ',', '.') ?></td>
                             <td><a href="../<?= htmlspecialchars($chapter['file_path']) ?>" download>Unduh</a></td>
-                            <td>
+                            <td class="text-nowrap">
+                              <button type="button" class="btn btn-warning btn-sm edit-button me-2"
+                                data-chapter_id="<?= $chapter['chapter_id'] ?>"
+                                data-title="<?= htmlspecialchars($chapter['title']) ?>"
+                                data-description="<?= htmlspecialchars($chapter['description']) ?>"
+                                data-price="<?= $chapter['price'] ?>"
+                                data-category_id="<?= $chapter['book_id'] ?>"
+                                data-file_path="<?= htmlspecialchars($chapter['file_path']) ?>">
+                                Edit
+                              </button>
                               <form method="POST" style="display:inline;">
                                 <input type="hidden" name="chapter_id" value="<?= $chapter['chapter_id'] ?>">
-                                <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</button>
+                                <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus bab buku ini?')">Hapus</button>
                               </form>
                             </td>
+
                           </tr>
                         <?php endwhile; ?>
                       </tbody>
@@ -306,6 +367,45 @@ $book_count = $conn->query("SELECT COUNT(*) as total_book FROM chapters")->fetch
     </div>
   </div>
   <script>
+    document.querySelectorAll('.edit-button').forEach(button => {
+      button.addEventListener('click', function() {
+        // Isi form dengan data dari tabel
+        document.getElementById('chapter_id').value = this.getAttribute('data-chapter_id');
+        document.getElementById('title').value = this.getAttribute('data-title');
+        document.getElementById('description').value = this.getAttribute('data-description');
+        document.getElementById('price').value = this.getAttribute('data-price');
+        document.getElementById('category_id').value = this.getAttribute('data-category_id');
+        document.getElementById('existing_file_path').value = this.getAttribute('data-file_path');
+
+        // Tampilkan tombol "Edit Bab" dan sembunyikan "Tambah Bab"
+        const submitButton = document.getElementById('submit-button');
+        const editButton = document.getElementById('edit-button');
+        const clearButton = document.getElementById('clear-button');
+        submitButton.classList.add('d-none'); // Sembunyikan tombol "Tambah Bab"
+        editButton.classList.remove('d-none'); // Tampilkan tombol "Edit Bab"
+        clearButton.classList.remove('d-none'); // Tampilkan tombol "Clear Data"
+      });
+    });
+
+    document.getElementById('clear-button').addEventListener('click', function() {
+      // Kosongkan semua field di form
+      document.getElementById('chapter_id').value = '';
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('price').value = '';
+      document.getElementById('category_id').value = '';
+      document.getElementById('existing_file_path').value = '';
+      document.getElementById('chapter_file').value = '';
+
+      // Tampilkan tombol "Tambah Bab" dan sembunyikan "Edit Bab" serta "Clear Data"
+      const submitButton = document.getElementById('submit-button');
+      const editButton = document.getElementById('edit-button');
+      const clearButton = document.getElementById('clear-button');
+      submitButton.classList.remove('d-none'); // Tampilkan tombol "Tambah Bab"
+      editButton.classList.add('d-none'); // Sembunyikan tombol "Edit Bab"
+      clearButton.classList.add('d-none'); // Sembunyikan tombol "Clear Data"
+    });
+
     function confirmLogout(event) {
       // Mencegah aksi default tombol
       event.preventDefault();

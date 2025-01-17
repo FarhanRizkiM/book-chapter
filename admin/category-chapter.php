@@ -63,6 +63,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     exit;
   }
 
+  if ($_POST['action'] == 'edit') {
+    $id = $_POST['id'];
+    $title = trim($_POST['title']);
+    $description = trim($_POST['description']);
+    $category = trim($_POST['category']);
+
+    if (empty($title) || empty($category)) {
+      $_SESSION['error'] = "Judul dan kategori wajib diisi!";
+      header("Location: category-chapter.php");
+      exit;
+    }
+
+    if (!empty($_FILES['image_path']['name'])) {
+      $image_name = $_FILES['image_path']['name'];
+      $image_tmp = $_FILES['image_path']['tmp_name'];
+      $image_ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+      $allowed_exts = ['jpg', 'png'];
+
+      if (in_array($image_ext, $allowed_exts)) {
+        $image_dir = '../uploads/images/';
+        if (!is_dir($image_dir)) mkdir($image_dir, 0777, true);
+
+        $new_image_name = uniqid() . '.' . $image_ext;
+        $image_path = $image_dir . $new_image_name;
+
+        if (move_uploaded_file($image_tmp, $image_path)) {
+          $image_path_db = 'uploads/images/' . $new_image_name;
+        } else {
+          $_SESSION['error'] = "Gagal mengunggah gambar.";
+          header("Location: category-chapter.php");
+          exit;
+        }
+      } else {
+        $_SESSION['error'] = "Hanya file JPG dan PNG yang diperbolehkan.";
+        header("Location: category-chapter.php");
+        exit;
+      }
+    } else {
+      $image_path_db = $_POST['existing_image'];
+    }
+
+    $stmt = $conn->prepare("UPDATE book_details SET title = ?, description = ?, category = ?, image_path = ? WHERE id = ?");
+    $stmt->bind_param("ssssi", $title, $description, $category, $image_path_db, $id);
+
+    if ($stmt->execute()) {
+      $_SESSION['success'] = "Kategori berhasil diperbarui!";
+    } else {
+      $_SESSION['error'] = "Terjadi kesalahan: " . $stmt->error;
+    }
+    $stmt->close();
+
+    header("Location: category-chapter.php");
+    exit;
+  }
+
+
   if ($_POST['action'] == 'delete') {
     $id = $_POST['id'];
     $stmt = $conn->prepare("DELETE FROM book_details WHERE id = ?");
@@ -226,9 +282,11 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
               <div class="card">
                 <div class="card-body p-3">
                   <form method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="action" value="add">
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="existing_image" id="existing_image">
+                    <input type="hidden" name="action" value="add" id="action">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="title" name="title" placeholder="Judul">
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Judul" required>
                       <label for="title">Judul</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -240,11 +298,15 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
                       <input type="file" class="form-control" id="image_path" name="image_path">
                     </div>
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="category" name="category" placeholder="Kategori">
+                      <input type="text" class="form-control" id="category" name="category" placeholder="Kategori" required>
                       <label for="category">Kategori</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambah Kategori</button>
+                    <button type="submit" class="btn btn-primary" id="add-button">Tambah Kategori</button>
+                    <button type="button" class="btn btn-secondary d-none" id="clear-button">Clear Data</button>
+                    <button type="submit" class="btn btn-danger d-none" id="edit-button" onclick="document.getElementById('action').value='edit'">Edit Kategori</button>
                   </form>
+
+
                 </div>
               </div>
               <h4 class="card-title fw-semibold mb-3">Daftar Bab Buku</h4>
@@ -264,28 +326,45 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
                         </tr>
                       </thead>
                       <tbody>
-                        <?php while ($row = $categories->fetch_assoc()): ?>
+                        <?php if ($categories->num_rows > 0): ?>
+                          <?php while ($row = $categories->fetch_assoc()): ?>
+                            <tr>
+                              <td><?php echo $row['id']; ?></td>
+                              <td><?php echo htmlspecialchars($row['title']); ?></td>
+                              <td><?php echo htmlspecialchars($row['category']); ?></td>
+                              <td><?php echo htmlspecialchars($row['description']); ?></td>
+                              <td>
+                                <?php if (!empty($row['image_path'])): ?>
+                                  <img src="../<?php echo $row['image_path']; ?>" alt="Cover" style="width: 100px; height: auto;">
+                                <?php else: ?>
+                                  Tidak ada gambar
+                                <?php endif; ?>
+                              </td>
+                              <td class="text-nowrap">
+                                <div class="d-flex">
+                                  <button type="button" class="btn btn-warning btn-sm me-2 edit-button"
+                                    data-id="<?= $row['id'] ?>"
+                                    data-title="<?= htmlspecialchars($row['title']) ?>"
+                                    data-description="<?= htmlspecialchars($row['description']) ?>"
+                                    data-category="<?= htmlspecialchars($row['category']) ?>"
+                                    data-image="<?= htmlspecialchars($row['image_path']) ?>">
+                                    Edit
+                                  </button>
+                                  <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</button>
+                                  </form>
+                                </div>
+                              </td>
+                            </tr>
+                          <?php endwhile; ?>
+                        <?php else: ?>
                           <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['title']); ?></td>
-                            <td><?php echo htmlspecialchars($row['category']); ?></td>
-                            <td><?php echo htmlspecialchars($row['description']); ?></td>
-                            <td>
-                              <?php if ($row['image_path']): ?>
-                                <img src="../<?php echo $row['image_path']; ?>" alt="Cover" style="width: 100px; height: auto;">
-                              <?php else: ?>
-                                Tidak ada gambar
-                              <?php endif; ?>
-                            </td>
-                            <td>
-                              <form method="POST" style="display: inline;">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</button>
-                              </form>
-                            </td>
+                            <td colspan="6" class="text-center">Tidak ada data kategori buku.</td>
                           </tr>
-                        <?php endwhile; ?>
+                        <?php endif; ?>
                       </tbody>
+
                     </table>
                   </div>
                 </div>
@@ -297,6 +376,44 @@ $category_count = $conn->query("SELECT COUNT(*) as total FROM book_details")->fe
     </div>
   </div>
   <script>
+    document.querySelectorAll('.edit-button').forEach(button => {
+      button.addEventListener('click', function() {
+        document.getElementById('id').value = this.getAttribute('data-id');
+        document.getElementById('title').value = this.getAttribute('data-title');
+        document.getElementById('description').value = this.getAttribute('data-description');
+        document.getElementById('category').value = this.getAttribute('data-category');
+        document.getElementById('existing_image').value = this.getAttribute('data-image');
+
+        const addButton = document.getElementById('add-button');
+        const editButton = document.getElementById('edit-button');
+        const clearButton = document.getElementById('clear-button');
+
+        document.getElementById('action').value = 'edit'; // Ubah action menjadi edit
+        addButton.classList.add('d-none'); // Sembunyikan tombol "Tambah Kategori"
+        editButton.classList.remove('d-none'); // Tampilkan tombol "Edit Kategori"
+        clearButton.classList.remove('d-none'); // Tampilkan tombol "Clear Data"
+      });
+    });
+
+    document.getElementById('clear-button').addEventListener('click', function() {
+      document.getElementById('id').value = '';
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('category').value = '';
+      document.getElementById('existing_image').value = '';
+      document.getElementById('image_path').value = '';
+
+      const addButton = document.getElementById('add-button');
+      const editButton = document.getElementById('edit-button');
+      const clearButton = document.getElementById('clear-button');
+
+      document.getElementById('action').value = 'add'; // Kembali ke mode tambah
+      addButton.classList.remove('d-none'); // Tampilkan tombol "Tambah Kategori"
+      editButton.classList.add('d-none'); // Sembunyikan tombol "Edit Kategori"
+      clearButton.classList.add('d-none'); // Sembunyikan tombol "Clear Data"
+    });
+
+
     function confirmLogout(event) {
       // Mencegah aksi default tombol
       event.preventDefault();
