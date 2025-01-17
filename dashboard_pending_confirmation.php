@@ -72,7 +72,7 @@ if (!isset($_SESSION['user_id'])) {
         }
 
         .btn-dashboard:hover {
-            background-color: #0056b3;
+            background-color:rgb(255, 255, 255);
         }
 
         .footer {

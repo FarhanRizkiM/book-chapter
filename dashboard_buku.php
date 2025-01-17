@@ -219,7 +219,7 @@ $user_id = $_SESSION['user_id'];
         </header>
 
 
-        <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">
+        <div class="intro-section small" style="background-image: url('images/bkgbuku.jpg');">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 mx-auto text-center" data-aos="fade-up">

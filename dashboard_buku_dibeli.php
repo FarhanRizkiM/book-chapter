@@ -252,12 +252,12 @@ $user_id = $_SESSION['user_id'];
             </div>
         </header>
 
-        <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">
+        <div class="intro-section small" style="background-image: url('images/bkgabout.jpg');">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
                         <div class="intro">
-                            <h1>Bab Buku yang Sudah Dibeli</h1><br>
+                            <h1>Bab Buku Sudah Dibeli</h1><br>
                             <p>Akses bab-bab yang sudah Anda beli kapan saja. Semua tersedia di satu tempat untuk kemudahan Anda.</p>
                         </div>
                     </div>

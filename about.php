@@ -145,7 +145,7 @@ session_start(); // Memulai session untuk mengecek status login
     </header>
 
 
-    <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">
+    <div class="intro-section small" style="background-image: url('images/bkgabout.jpg');">
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
@@ -163,7 +163,7 @@ session_start(); // Memulai session untuk mengecek status login
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4 mb-lg-0">
-            <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
+            <img src="images/tentangkami.jpg" alt="Image" class="img-fluid">
           </div>
           <div class="col-lg-5 ml-auto">
             <span class="caption">Tentang Kami</span>
@@ -198,16 +198,6 @@ session_start(); // Memulai session untuk mengecek status login
               <img src="images/person_2.jpg" alt="Image" class="img-fluid">
               <div class="feature-1-content">
                 <h2>Taylor Simpson</h2>
-                <span class="position mb-3 d-block">Co-Founder, CEO</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-5 mb-lg-5">
-            <div class="feature-1 border person text-center">
-              <img src="images/person_3.jpg" alt="Image" class="img-fluid">
-              <div class="feature-1-content">
-                <h2>Jonas Tabble</h2>
                 <span class="position mb-3 d-block">Co-Founder, CEO</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
               </div>

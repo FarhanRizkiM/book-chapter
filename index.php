@@ -143,7 +143,7 @@ session_start(); // Memulai session untuk mengecek status login
 
     <!-- Bagian konten utama -->
     <div class="hero-slide owl-carousel site-blocks-cover">
-      <div class="intro-section" style="background-image: url('images/hero_1.jpg');">
+      <div class="intro-section" style="background-image: url('images/backgroundpage1.jpg');">
         <div class="container">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
@@ -154,7 +154,7 @@ session_start(); // Memulai session untuk mengecek status login
           </div>
         </div>
       </div>
-      <div class="intro-section" style="background-image: url('images/hero_2.jpg');">
+      <div class="intro-section" style="background-image: url('images/backgroundpage2.jpg');">
         <div class="container">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
@@ -173,7 +173,7 @@ session_start(); // Memulai session untuk mengecek status login
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4 mb-lg-0">
-            <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
+            <img src="images/tentangkami.jpg" alt="Image" class="img-fluid">
           </div>
           <div class="col-lg-5 ml-auto">
             <span class="caption">Tentang Kami</span>

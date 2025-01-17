@@ -145,7 +145,7 @@ session_start(); // Memulai session untuk mengecek status login
     </header>
 
 
-    <div class="intro-section small" style="background-image: url('images/hero_2.jpg');">
+    <div class="intro-section small" style="background-image: url('images/bkgcontact.jpg');">
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7 mx-auto text-center" data-aos="fade-up">

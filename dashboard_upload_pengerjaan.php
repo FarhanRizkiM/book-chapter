@@ -207,12 +207,12 @@ $user_id = $_SESSION['user_id'];
             </div>
         </header>
 
-        <div class="intro-section small" style="background-image: url('images/hero_1.jpg');">
+        <div class="intro-section small" style="background-image: url('images/bkgservice.jpg');">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
                         <div class="intro">
-                            <h1>Upload Hasil Pengerjaan Bab Buku</h1><br>
+                            <h1>Upload Hasil Pengerjaan</h1><br>
                             <p>Unggah hasil pengerjaan atau catatan dari bab yang Anda pelajari untuk referensi atau penyimpanan.</p>
                         </div>
                     </div>

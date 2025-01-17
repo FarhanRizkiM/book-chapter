@@ -224,7 +224,7 @@ $user_id = $_SESSION['user_id'];
 
         <!-- Bagian konten utama -->
         <div class="hero-slide owl-carousel site-blocks-cover">
-            <div class="intro-section" style="background-image: url('images/hero_1.jpg');">
+            <div class="intro-section" style="background-image: url('images/backgroundpage1.jpg');">
                 <div class="container">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
@@ -234,7 +234,7 @@ $user_id = $_SESSION['user_id'];
                     </div>
                 </div>
             </div>
-            <div class="intro-section" style="background-image: url('images/hero_2.jpg');">
+            <div class="intro-section" style="background-image: url('images/backgroundpage2.jpg');">
                 <div class="container">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-7 mx-auto text-center" data-aos="fade-up">
