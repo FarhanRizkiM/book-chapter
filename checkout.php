@@ -2,16 +2,44 @@
 session_start();
 require 'db.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.html");
+    exit();
+}
+
 $user_id = $_SESSION['user_id'];
 $chapter_id = $_GET['chapter_id'];
 
+// Ambil status order berdasarkan user_id dan chapter_id
+$sqlOrder = "SELECT order_id, status FROM orders WHERE user_id = ? AND chapter_id = ? LIMIT 1";
+$stmtOrder = $conn->prepare($sqlOrder);
+$stmtOrder->bind_param("ii", $user_id, $chapter_id);
+$stmtOrder->execute();
+$resultOrder = $stmtOrder->get_result();
+$order = $resultOrder->fetch_assoc();
+$order_id = $order['order_id'] ?? null;
+$orderStatus = $order['status'] ?? null;
+
+// Logika untuk tombol checkout
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $sql = "INSERT INTO orders (user_id, chapter_id, status) VALUES ('$user_id', '$chapter_id', 'pending')";
-    if ($conn->query($sql) === TRUE) {
-        header("Location: dashboard_upload_payment.php?order_id=" . $conn->insert_id);
+    if ($orderStatus == 'rejected') {
+        // Hapus order lama dengan status rejected
+        $sqlDelete = "DELETE FROM orders WHERE order_id = ?";
+        $stmtDelete = $conn->prepare($sqlDelete);
+        $stmtDelete->bind_param("i", $order_id);
+        $stmtDelete->execute();
+    }
+
+    // Buat order baru
+    $sqlInsert = "INSERT INTO orders (user_id, chapter_id, status) VALUES (?, ?, 'pending')";
+    $stmtInsert = $conn->prepare($sqlInsert);
+    $stmtInsert->bind_param("ii", $user_id, $chapter_id);
+
+    if ($stmtInsert->execute()) {
+        header("Location: dashboard_upload_payment.php?order_id=" . $stmtInsert->insert_id);
         exit();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmtInsert->error;
     }
 }
 ?>
@@ -221,14 +249,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Ikon bank -->
                 <i class="fas fa-university bank-icon"></i>
                 <h2 class="checkout-title">Pembayaran Bab Buku</h2>
-                <p class="bank-details">
-                    Silakan lakukan pembayaran ke nomor rekening berikut:
-                    <br><span><strong>Bank ABC</strong> - 1234567890</span>
-                    <span><strong>Atas Nama:</strong> Book Chapter App</span>
-                </p>
-                <form method="POST">
-                    <button type="submit" class="btn-modern">Saya Sudah Membayar</button>
-                </form>
+                <?php if ($orderStatus == 'pending'): ?>
+                    <p>Status: <strong>Sedang Diverifikasi</strong></p>
+                    <button class="btn-modern btn-disabled" disabled>Sedang Diverifikasi</button>
+                <?php elseif ($orderStatus == 'approved'): ?>
+                    <p>Status: <strong>Sudah Dibeli</strong></p>
+                    <a href="download_chapter.php?chapter_id=<?= $chapter_id; ?>" class="btn-modern">Download Bab</a>
+                <?php elseif ($orderStatus == 'rejected'): ?>
+                    <p>Status: <strong>Ditolak</strong>. Silakan coba lagi.</p>
+                    <form method="POST">
+                        <button type="submit" class="btn-modern">Checkout Ulang</button>
+                    </form>
+                <?php else: ?>
+                    <p>Silakan lakukan pembayaran untuk melanjutkan.</p>
+                    <form method="POST">
+                        <button type="submit" class="btn-modern">Checkout</button>
+                    </form>
+                <?php endif; ?>
+
             </div>
         </div>
 

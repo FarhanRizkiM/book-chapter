@@ -13,11 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $action = $_POST['action'];
   $status = ($action == 'approve') ? 'approved' : 'rejected';
 
-  $sql = "UPDATE orders SET status = '$status' WHERE order_id = '$order_id'";
-  if ($conn->query($sql) === TRUE) {
+  // Gunakan prepared statement untuk keamanan
+  $sql = "UPDATE orders SET status = ? WHERE order_id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("si", $status, $order_id);
+
+  if ($stmt->execute()) {
     header("Location: payment.php");
+    exit();
   } else {
-    echo "Error updating order: " . $conn->error;
+    echo "Error updating order: " . $stmt->error;
   }
 }
 
@@ -139,6 +144,14 @@ $result_history = $conn->query($sql_history);
                   <i class="ti ti-credit-card"></i>
                 </span>
                 <span class="hide-menu">Pembayaran</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="upload_buku.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-book"></i>
+                </span>
+                <span class="hide-menu">Hasil Pengerjaan</span>
               </a>
             </li>
           </ul>

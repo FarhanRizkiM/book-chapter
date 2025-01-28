@@ -132,6 +132,14 @@ if ($users === false) {
                 <span class="hide-menu">Pembayaran</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="upload_buku.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-book"></i>
+                </span>
+                <span class="hide-menu">Hasil Pengerjaan</span>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
