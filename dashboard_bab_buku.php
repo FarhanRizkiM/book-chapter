@@ -566,7 +566,7 @@ function truncateText($text, $wordLimit = 50)
                                                                 <h6><?= htmlspecialchars($chapter['title']); ?></h6>
                                                                 <p class="text-muted"><?= htmlspecialchars(truncateText($chapter['description'], 15)); ?></p>
                                                             </div>
-                                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chapterModal<?= $chapter['chapter_id']; ?>" data-dismiss="modal">Preview</button>
+                                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chapterModal<?= $chapter['chapter_id']; ?>" data-dismiss="modal">Detail</button>
                                                         </li>
                                                     <?php endforeach; ?>
                                                 <?php else: ?>
@@ -582,7 +582,6 @@ function truncateText($text, $wordLimit = 50)
                             </div>
 
                             <!-- Modal Detail Bab -->
-                            <!-- Modal Detail Bab -->
                             <?php foreach ($chapters[$row['book_id']] as $chapter): ?>
                                 <div class="modal fade" id="chapterModal<?= $chapter['chapter_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="chapterModalLabel<?= $chapter['chapter_id']; ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-md" role="document">
@@ -597,7 +596,7 @@ function truncateText($text, $wordLimit = 50)
                                                 <p><strong>Deskripsi:</strong> <?= htmlspecialchars($chapter['description']); ?></p>
                                                 <p><strong>Harga:</strong> Rp<?= number_format($chapter['price'], 2, ',', '.'); ?></p>
                                                 <?php
-                                                // Query global untuk chapter_id (status sedang dibeli oleh user lain)
+                                                // Status pesanan global
                                                 $sqlGlobalStatus = "SELECT status FROM orders WHERE chapter_id = ? AND status IN ('waiting_confirmation', 'approved') LIMIT 1";
                                                 $stmtGlobalStatus = $conn->prepare($sqlGlobalStatus);
                                                 $stmtGlobalStatus->bind_param("i", $chapter['chapter_id']);
@@ -605,7 +604,7 @@ function truncateText($text, $wordLimit = 50)
                                                 $resultGlobalStatus = $stmtGlobalStatus->get_result();
                                                 $globalOrderStatus = $resultGlobalStatus->fetch_assoc()['status'] ?? null;
 
-                                                // Query untuk mengecek status pesanan user saat ini
+                                                // Status pesanan user saat ini
                                                 $sqlOrderStatus = "SELECT status FROM orders WHERE user_id = ? AND chapter_id = ? LIMIT 1";
                                                 $stmtOrderStatus = $conn->prepare($sqlOrderStatus);
                                                 $stmtOrderStatus->bind_param("ii", $user_id, $chapter['chapter_id']);
@@ -613,7 +612,7 @@ function truncateText($text, $wordLimit = 50)
                                                 $resultOrderStatus = $stmtOrderStatus->get_result();
                                                 $userOrderStatus = $resultOrderStatus->fetch_assoc()['status'] ?? null;
 
-                                                // Tampilan tombol berdasarkan status
+                                                // Tampilan tombol
                                                 if ($userOrderStatus === 'waiting_confirmation') {
                                                     echo '<button class="btn btn-warning" disabled>Sedang Diverifikasi</button>';
                                                 } elseif ($userOrderStatus === 'approved') {
@@ -630,12 +629,18 @@ function truncateText($text, $wordLimit = 50)
                                                 ?>
                                             </div>
                                             <div class="modal-footer">
+                                                <button
+                                                    onclick="window.open('preview_bab.php?chapter_id=<?= $chapter['chapter_id']; ?>', '_blank');"
+                                                    class="btn btn-secondary">
+                                                    Preview Bab
+                                                </button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#bookModal<?= $row['book_id']; ?>').modal('show')">Kembali</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+
 
 
                         <?php endwhile; ?>

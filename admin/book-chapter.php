@@ -25,38 +25,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Mengupload file .docx
-    $file_name = str_replace(' ', '_', basename($_FILES['chapter_file']['name']));
-    $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-    $allowed_types = ['docx'];
-    if (!in_array($file_type, $allowed_types)) {
-      $_SESSION['error'] = "Hanya file DOCX yang diperbolehkan.";
-      header("Location: book-chapter.php");
-      exit;
-    }
-
     $upload_dir = '../uploads/chapters/';
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
-    $file_path = $upload_dir . $file_name;
-    if (!move_uploaded_file($_FILES['chapter_file']['tmp_name'], $file_path)) {
-      $_SESSION['error'] = "Gagal mengunggah file bab buku.";
-      header("Location: book-chapter.php");
-      exit;
-    }
+    $docx_file_name = str_replace(' ', '_', basename($_FILES['chapter_file']['name']));
+    $pdf_file_name = str_replace(' ', '_', basename($_FILES['chapter_preview_file']['name']));
 
-    // Path file yang disimpan ke database
-    $file_path_db = 'uploads/chapters/' . $file_name;
+    $docx_file_path = $upload_dir . $docx_file_name;
+    $pdf_file_path = $upload_dir . $pdf_file_name;
 
-    // Simpan ke database
-    $stmt = $conn->prepare("INSERT INTO chapters (book_id, title, description, price, file_path) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issds", $category_id, $title, $description, $price, $file_path_db);
+    if (
+      move_uploaded_file($_FILES['chapter_file']['tmp_name'], $docx_file_path) &&
+      move_uploaded_file($_FILES['chapter_preview_file']['tmp_name'], $pdf_file_path)
+    ) {
 
-    if ($stmt->execute()) {
-      $_SESSION['success'] = "Bab buku berhasil ditambahkan!";
+      $docx_file_path_db = 'uploads/chapters/' . $docx_file_name;
+      $pdf_file_path_db = 'uploads/chapters/' . $pdf_file_name;
+
+      // Simpan ke database
+      $stmt = $conn->prepare("INSERT INTO chapters (book_id, title, description, price, file_path, preview_file_path) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("issdss", $category_id, $title, $description, $price, $docx_file_path_db, $pdf_file_path_db);
+
+      if ($stmt->execute()) {
+        $_SESSION['success'] = "Bab buku berhasil ditambahkan!";
+      } else {
+        $_SESSION['error'] = "Error: " . $stmt->error;
+      }
+      $stmt->close();
     } else {
-      $_SESSION['error'] = "Error: " . $stmt->error;
+      $_SESSION['error'] = "Gagal mengunggah file.";
     }
-    $stmt->close();
 
     header("Location: book-chapter.php");
     exit;
@@ -67,35 +65,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = $_POST['price'];
     $category_id = $_POST['category_id'];
 
-    // Jika ada file baru yang diunggah
+    $docx_file_path_db = $_POST['existing_file_path'];
+    $pdf_file_path_db = $_POST['existing_preview_file_path'];
+
+    // Jika file baru diunggah
     if (!empty($_FILES['chapter_file']['name'])) {
-      $file_name = str_replace(' ', '_', basename($_FILES['chapter_file']['name']));
-      $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-      $allowed_types = ['docx'];
-
-      if (!in_array($file_type, $allowed_types)) {
-        $_SESSION['error'] = "Hanya file DOCX yang diperbolehkan.";
-        header("Location: book-chapter.php");
-        exit;
+      $docx_file_name = str_replace(' ', '_', basename($_FILES['chapter_file']['name']));
+      $docx_file_path = $upload_dir . $docx_file_name;
+      if (move_uploaded_file($_FILES['chapter_file']['tmp_name'], $docx_file_path)) {
+        $docx_file_path_db = 'uploads/chapters/' . $docx_file_name;
       }
+    }
 
-      $upload_dir = '../uploads/chapters/';
-      $file_path = $upload_dir . $file_name;
-      if (!move_uploaded_file($_FILES['chapter_file']['tmp_name'], $file_path)) {
-        $_SESSION['error'] = "Gagal mengunggah file bab buku.";
-        header("Location: book-chapter.php");
-        exit;
+    if (!empty($_FILES['chapter_preview_file']['name'])) {
+      $pdf_file_name = str_replace(' ', '_', basename($_FILES['chapter_preview_file']['name']));
+      $pdf_file_path = $upload_dir . $pdf_file_name;
+      if (move_uploaded_file($_FILES['chapter_preview_file']['tmp_name'], $pdf_file_path)) {
+        $pdf_file_path_db = 'uploads/chapters/' . $pdf_file_name;
       }
-
-      $file_path_db = 'uploads/chapters/' . $file_name;
-    } else {
-      // Jika tidak ada file baru, gunakan file yang sudah ada
-      $file_path_db = $_POST['existing_file_path'];
     }
 
     // Update data di database
-    $stmt = $conn->prepare("UPDATE chapters SET book_id = ?, title = ?, description = ?, price = ?, file_path = ? WHERE chapter_id = ?");
-    $stmt->bind_param("issdsi", $category_id, $title, $description, $price, $file_path_db, $chapter_id);
+    $stmt = $conn->prepare("UPDATE chapters SET book_id = ?, title = ?, description = ?, price = ?, file_path = ?, preview_file_path = ? WHERE chapter_id = ?");
+    $stmt->bind_param("issdssi", $category_id, $title, $description, $price, $docx_file_path_db, $pdf_file_path_db, $chapter_id);
 
     if ($stmt->execute()) {
       $_SESSION['success'] = "Bab buku berhasil diperbarui!";
@@ -302,7 +294,11 @@ $book_count = $conn->query("SELECT COUNT(*) as total_book FROM chapters")->fetch
                     </div>
                     <div class="mb-3">
                       <label for="chapter_file">File Bab (.docx)</label>
-                      <input type="file" class="form-control" id="chapter_file" name="chapter_file">
+                      <input type="file" class="form-control" id="chapter_file" name="chapter_file" accept=".docx" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="chapter_preview_file">File Preview Bab (.pdf)</label>
+                      <input type="file" class="form-control" id="chapter_preview_file" name="chapter_preview_file" accept=".pdf" required>
                     </div>
                     <div class="mb-3">
                       <label for="category_id">Pilih Judul Buku</label>
